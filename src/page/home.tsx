@@ -7,6 +7,7 @@ const Home = () => {
         <div className="col-xs-6">
           <h1>This is home page</h1>
           <h2>First changes</h2>
+          <h3>second changes</h3>
         </div>
       </div>
     </div>
