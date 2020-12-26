@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import NavBar from '../nav-bar/nav-bar';
 import Search from '../search/search';
 import styles from './header.module.scss';
+import logo from '../../images/logo.svg';
 
 const Header: FC = () => {
   return (
@@ -11,7 +12,7 @@ const Header: FC = () => {
           <div className="col-xs-8 col-xs-offset-2">
             <div className="row center-xs middle-xs">
               <div className="col-xs-2">
-                <img src="logo.svg" width="36px" alt="" />
+                <img src={logo} width="36px" alt="" />
               </div>
               <div className="col-xs-6">
                 <NavBar />

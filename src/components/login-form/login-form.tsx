@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './login-form.module.scss';
+import logo from '../../images/logo.svg';
 
 const LoginForm = () => {
   return (
@@ -8,7 +9,7 @@ const LoginForm = () => {
         <div className="container">
           <div className="row center-xs margin-bottom--16">
             <div className="col-xs-12">
-              <img src="logo.svg" width="160px" alt="" />
+              <img src={logo} width="160px" alt="" />
             </div>
           </div>
           <div className="row">
