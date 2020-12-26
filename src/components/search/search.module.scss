@@ -1,0 +1,26 @@
+.search_wrap {
+    display: inline-flex;
+    border: 1px solid #535353;
+    height: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+    width:100%;
+
+}
+
+.search {
+    border:none;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    padding-left: 8px;
+
+}
+
+.icon {
+    cursor: pointer;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0px 8px;
+}
