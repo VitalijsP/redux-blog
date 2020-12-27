@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './login-form.module.scss';
+import styles from '../login-form/login-form.module.scss';
 import logo from '../../images/logo.svg';
 
-const LoginForm = () => {
+const RegistrationForm = () => {
   return (
     <section>
       <div className="container">
@@ -14,20 +14,36 @@ const LoginForm = () => {
         <div className="row">
           <div className="col-xs-2 col-xs-offset-5">
             <form action="">
+              <label htmlFor="email">E-mail:</label>
               <input
                 type="email"
-                id="username"
+                id="email"
                 className={styles.input}
                 placeholder="e-mail adress"
               />
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                className={styles.input}
+                placeholder="Username"
+              />
+              <label htmlFor="password">Password:</label>
               <input
                 type="password"
                 id="password"
                 className={styles.input}
                 placeholder="password"
               />
+              <label htmlFor="password">Repeat password:</label>
+              <input
+                type="password"
+                id="password"
+                className={styles.input}
+                placeholder="Repeat password"
+              />
               <button className={styles.button} type="submit">
-                Log in
+                Sign up
               </button>
             </form>
           </div>
@@ -47,4 +63,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

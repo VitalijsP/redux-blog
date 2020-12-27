@@ -1,13 +1,12 @@
 import React from 'react';
+import Card from '../components/card/card';
 
 const Home = () => {
   return (
     <div className="container">
-      <div className="row center-xs">
-        <div className="col-xs-6">
-          <h1>This is home page</h1>
-          <h2>First changes</h2>
-          <h3>second changes</h3>
+      <div className="row">
+        <div className="col-xs-8 col-xs-offset-2">
+          <Card />
         </div>
       </div>
     </div>
