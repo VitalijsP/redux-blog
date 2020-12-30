@@ -1,21 +1,35 @@
+$Manatee: #8e9aaffd; // pelēcīgi zila body background-color
+$LanguidLavender: #CBC0D3; // gaiši violeta
+$PalePink: #EFD3D7; // pelēcīgi rozā card border-color
+$PalePurplePantone: #FEEAFA; // gaiši rozā
+$LavenderWeb: #dee2ff; // gaiši zila card background-color
+
 .card {
 display: flex;
 width: 100%;
-background-color: #ffffffcc;
+background-color: #FFFFFF;
 margin-bottom: 20px;
 border-radius: 4px;
-border: 1px solid grey;
+border: 1px solid $PalePink;
 overflow: hidden;
 box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
-padding: 0px 14px;
+padding: 10px 14px;
+opacity: 0.9;
+transition: transform 0.2s ease;
+transform: translate(0px, 0px);
 }
 
 .card:hover {
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: #ffffffa2;
+    background-color: $LavenderWeb;
+    opacity: 1;
+    transform: translate(1px, 1px);
 }
 
 .image {
+    position: relative;
+    width: 200px;
+    height: 140px;
     border-radius: 4px;
 }
 
@@ -25,6 +39,7 @@ padding: 0px 14px;
     margin-bottom: 8px;
     margin-right: 12px;
     padding: 2px 10px;
+    font-style: italic;
 }
 
 .btn:focus {

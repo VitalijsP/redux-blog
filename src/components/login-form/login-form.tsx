@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import styles from './login-form.module.scss';
-import logo from '../../images/logo.svg';
+import logo from '../../images/logo.png';
 
-const LoginForm = () => {
+type Props = {
+  emailValue: string;
+  passwordValue: string;
+  handleEmailValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  userSignInHandler: () => void;
+};
+
+const LoginForm: FC<Props> = ({
+  emailValue,
+  passwordValue,
+  handleEmailValue,
+  handlePasswordValue,
+  userSignInHandler,
+}) => {
   return (
     <section>
       <div className="container">
-        <div className="row center-xs margin-bottom--16">
-          <div className="col-xs-8 col-xs-offset-2">
-            <img src={logo} width="160px" alt="" />
+        <div className="row middle-xs margin-bottom--16">
+          <div className="col-xs-2 col-xs-offset-5">
+            <div className={styles.logo_wrapper}>
+              <img src={logo} width="300px" alt="" />
+            </div>
           </div>
         </div>
         <div className="row">
@@ -16,30 +32,28 @@ const LoginForm = () => {
             <form action="">
               <input
                 type="email"
-                id="username"
+                id="email"
+                value={emailValue}
                 className={styles.input}
-                placeholder="e-mail adress"
+                placeholder="Email"
+                onChange={(e) => handleEmailValue(e)}
               />
               <input
                 type="password"
                 id="password"
+                value={passwordValue}
                 className={styles.input}
-                placeholder="password"
+                placeholder="Password"
+                onChange={(e) => handlePasswordValue(e)}
               />
-              <button className={styles.button} type="submit">
-                Log in
-              </button>
             </form>
-          </div>
-          <div className="row">
-            <div className="col-xs-6 col-xs-offset-3">
-              <p className={styles.paragraph}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-                rem nostrum autem dicta quas et suscipit tempora cum dignissimos
-                eum, non aperiam amet hic beatae consequatur veniam quibusdam,
-                maxime necessitatibus?
-              </p>
-            </div>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={userSignInHandler}
+            >
+              Sign in
+            </button>
           </div>
         </div>
       </div>

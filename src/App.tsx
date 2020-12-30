@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/header/header';
-import RegistrationForm from './components/registration-form/registration-form';
-import Article from './page/article';
+import ArticlePage from './page/article-page';
 import Home from './page/home';
 import Login from './page/login';
+import Registration from './page/registration';
 
 const App: FC = () => {
   return (
@@ -15,10 +15,10 @@ const App: FC = () => {
           <Login />
         </Route>
         <Route exact path="/registration">
-          <RegistrationForm />
+          <Registration />
         </Route>
         <Route exact path="/article/:articleId">
-          <Article />
+          <ArticlePage />
         </Route>
         <Route exact path="/home">
           <Home />
