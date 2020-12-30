@@ -21,24 +21,22 @@ const Header: FC = () => {
       <div className="container">
         <div className="row margin-bottom--8">
           <div className="col-xs-8 col-xs-offset-2">
-            {!loggedUser.userType ? (
-              <div className={styles.headerWrapper}>
-                <NavLink className={styles.nav_link} to="/home" exact={true}>
-                  Home
-                </NavLink>
-                <NavLink className={styles.nav_link} to="/login">
-                  Login
-                </NavLink>
-                <NavLink className={styles.nav_link} to="/registration">
-                  Registration
-                </NavLink>
-              </div>
-            ) : (
-              <SwitchAccount
-                logoutHandler={logoutHandler}
-                loggedUser={loggedUser}
-              />
-            )}
+            {/* {!loggedUser.userType ? ( */}
+            <SwitchAccount
+              logoutHandler={logoutHandler}
+              loggedUser={loggedUser}
+            />
+            <div className={styles.headerWrapper}>
+              <NavLink className={styles.nav_link} to="/home" exact={true}>
+                Home
+              </NavLink>
+              {/* <NavLink className={styles.nav_link} to="/login">
+                Login
+              </NavLink>
+              <NavLink className={styles.nav_link} to="/registration">
+                Registration
+              </NavLink> */}
+            </div>
           </div>
         </div>
       </div>

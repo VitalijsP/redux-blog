@@ -45,26 +45,26 @@ export const getPostsData = () => {
   return async (dispatch: Dispatch) => {
     axios.get('https://jsonplaceholder.typicode.com/posts').then(({ data }) => {
       console.log('data axios:', data);
-      const posts = data.map((post: BlogPosts) => ({
-        id: post.id,
+      const posts:BlogPosts[] = data.map((post:{ id: number, title: string, body: string}) => ({
+        postId: `${post.id}`,
         title: post.title,
         body: postBody(post.body),
         author: randomAuthor(),
-        date: Date(),
-        image: `https://picsum.photos/id/${post.id + 10}/500/500`,
+        date: Date.now(),
+        image: `https://picsum.photos/id/${post.id+10}/400/300`,
         category: sampleSize(categories, 2),
         comments: [],
       }));
       axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
-        const comments = res.data.map((comment: Comments) => ({
-          id: `${comment.id}`,
-          commentId: `${comment.commentId}`,
+        const comments:Comments[] = res.data.map((comment: {postId: number, id:number, body:string, email:string, }) => ({
+          postId: `${comment.postId}`,
+          commentId: `${comment.id}`,
           email: comment.email,
           body: comment.body,
         }));
         posts.forEach((post: BlogPosts) => {
           comments.forEach((comment: Comments) => {
-            if (post.id === comment.id) {
+            if (post.postId === comment.postId) {
               post.comments.push(comment);
             }
           });

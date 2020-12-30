@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { RootState } from '../store/store';
-import { blogPosts, categories } from '../data/data';
+import { categories } from '../data/data';
 import { getPostsData, deletePostAction } from '../store/blogPosts/action';
 import Card from '../components/card/card';
 import Search from '../components/search/search';
@@ -14,16 +14,11 @@ const Home: FC = () => {
 
   const dispatch = useDispatch();
 
-  const getDataHandler = () => {
-    dispatch(getPostsData());
-  };
-
   const deleteHandler = (id: string) => {
     dispatch(deletePostAction(id));
   };
 
   const posts = useSelector((store: RootState) => store.blogPosts);
-  console.log('posts: ', posts);
   const history = useHistory();
   const articleHandler = (id: string) => {
     history.push(`/article/${id}`);
@@ -33,14 +28,6 @@ const Home: FC = () => {
     setSearchValue(e.target.value);
   };
 
-  const searchHandler = () => {
-    if (!searchValue) {
-      alert('Write something!');
-      return;
-    }
-    console.log(searchValue);
-    setSearchValue('');
-  };
 
   const sortPostCategory = (postCategories: string[]) => {
     if (chosenCategory === 'All') {
@@ -62,7 +49,6 @@ const Home: FC = () => {
           <Search
             searchValue={searchValue}
             handleSearchValue={handleSearchValue}
-            searchHandler={searchHandler}
           />
           <div className="row">
             <FilterButton
@@ -77,18 +63,15 @@ const Home: FC = () => {
               />
             ))}
           </div>
-          <button type="button" onClick={() => getDataHandler()}>
-            Dati
-          </button>
           <div className="row">
-            {posts.map((post) => {
+            {posts.filter(post => post.title.toLowerCase().includes(searchValue.toLowerCase())).map((post) => {
               return (
                 sortPostCategory(post.category) && (
-                  <div className="col-xs-12" key={post.id}>
+                  <div className="col-xs-12" key={post.postId}>
                     <Card
                       post={post}
-                      deleteHandler={() => deleteHandler(post.id)}
-                      articleHandler={() => articleHandler(post.id)}
+                      deleteHandler={() => deleteHandler(post.postId)}
+                      articleHandler={() => articleHandler(post.postId)}
                     />
                   </div>
                 )

@@ -1,56 +1,68 @@
 $Manatee: #8e9aaffd; // pelēcīgi zila body background-color
-$LanguidLavender: #CBC0D3; // gaiši violeta
-$PalePink: #EFD3D7; // pelēcīgi rozā card border-color
-$PalePurplePantone: #FEEAFA; // gaiši rozā
+$LanguidLavender: #cbc0d3; // gaiši violeta
+$PalePink: #efd3d7; // pelēcīgi rozā card border-color
+$PalePurplePantone: #feeafa; // gaiši rozā
 $LavenderWeb: #dee2ff; // gaiši zila card background-color
 
 .card {
-display: flex;
-width: 100%;
-background-color: #FFFFFF;
-margin-bottom: 20px;
-border-radius: 4px;
-border: 1px solid $PalePink;
-overflow: hidden;
-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
-padding: 10px 14px;
-opacity: 0.9;
-transition: transform 0.2s ease;
-transform: translate(0px, 0px);
+    display: block;
+  width: 100%;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid $PalePink;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px 14px;
+  opacity: 0.9;
+  transition: transform 0.2s ease;
+  transform: translate(0px, 0px);
 }
 
 .card:hover {
-    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: $LavenderWeb;
-    opacity: 1;
-    transform: translate(1px, 1px);
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: $LavenderWeb;
+  opacity: 1;
+  transform: translate(1px, 1px);
 }
-
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  object-fit:center
+}
 .image {
-    position: relative;
-    width: 200px;
-    height: 140px;
-    border-radius: 4px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 300px;
+  object-fit: cover;
 }
 
 .btn {
-    background: none;
-    border:none;
-    margin-bottom: 8px;
-    margin-right: 12px;
-    padding: 2px 10px;
-    font-style: italic;
+  background: none;
+  border: none;
+  margin-bottom: 8px;
+  margin-right: 12px;
+  padding: 2px 10px;
+  font-style: italic;
 }
 
 .btn:focus {
-    background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn_text {
-font-size:12px;
-color:rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .btn_text:hover {
-    color: black;
+  color: black;
 }
+
+@media only screen and (max-width: 800px) {
+    .imageWrapper {
+        min-height: 200px;
+    }
+  }

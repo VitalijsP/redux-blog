@@ -13,7 +13,6 @@ export const randomAuthor = () => {
   const number = random(100);
   if (number > 50) {
     return 'Vitalijs';
-  } else {
-    return 'Mikus';
   }
+  return 'Mikus';
 };

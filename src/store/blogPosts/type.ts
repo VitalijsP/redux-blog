@@ -4,18 +4,18 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export type BlogPosts = {
-  id: string;
+  postId: string;
   title: string;
   body: string;
   author: string;
-  date: string;
+  date: number;
   image: string;
   category: string[];
   comments: Comments[];
 };
 
 export type Comments = {
-  id: string;
+  postId: string;
   commentId: string;
   email: string;
   body: string;

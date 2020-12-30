@@ -11,7 +11,7 @@ type Props = {
   handleNameValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePasswordValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePassword2Value: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  userRegisterHandler: () => void;
+  userRegisterHandler: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 const RegistrationForm: FC<Props> = ({
@@ -37,9 +37,10 @@ const RegistrationForm: FC<Props> = ({
         </div>
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <form action="">
+            <form action="" onSubmit={userRegisterHandler}>
               <label htmlFor="email">Email:</label>
               <input
+                required
                 type="email"
                 id="email"
                 className={styles.input}
@@ -48,6 +49,7 @@ const RegistrationForm: FC<Props> = ({
               />
               <label htmlFor="username">Username:</label>
               <input
+                required
                 type="text"
                 id="username"
                 className={styles.input}
@@ -56,6 +58,7 @@ const RegistrationForm: FC<Props> = ({
               />
               <label htmlFor="password">Password:</label>
               <input
+                required
                 type="password"
                 id="password"
                 className={styles.input}
@@ -64,22 +67,17 @@ const RegistrationForm: FC<Props> = ({
               />
               <label htmlFor="password2">Repeat password:</label>
               <input
+                required
                 type="password"
                 id="password2"
                 className={styles.input}
                 value={password2Value}
                 onChange={(e) => handlePassword2Value(e)}
               />
+              <button className={styles.button} type="submit">
+                Sign up
+              </button>
             </form>
-            <button
-              className={styles.button}
-              type="button"
-              onClick={() => {
-                userRegisterHandler();
-              }}
-            >
-              Sign up
-            </button>
           </div>
           <div className="row">
             <div className="col-xs-6 col-xs-offset-3">

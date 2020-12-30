@@ -98,7 +98,7 @@ const Comment: FC<Props> = ({ comments, postId }) => {
                     className={styles.button}
                     type="submit"
                     onClick={() => {
-                      commentSaveHandler(id, value);
+                      commentSaveHandler(postId, value);
                     }}
                   >
                     Add comment

@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LoginForm from '../components/login-form/login-form';
-import { usersData } from '../data/users';
+import { UserType } from '../data/users';
 import { loginUserAction } from '../store/user/action';
 
 const Login: FC = () => {
@@ -23,8 +23,11 @@ const Login: FC = () => {
       alert('Some fields are empty!');
       return;
     }
-    const validUser = usersData.find(
-      (user) => user.email === emailValue && user.pasword === passwordValue
+    const localUsers = JSON.parse(localStorage.usersRedux || '[]');
+
+    const validUser = localUsers.find(
+      (user: UserType) =>
+        user.email === emailValue && user.pasword === passwordValue
     );
     if (validUser) {
       dispatch(loginUserAction(validUser));

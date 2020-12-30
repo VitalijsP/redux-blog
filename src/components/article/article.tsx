@@ -15,6 +15,19 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
     <div className={styles.articleWrapper}>
       <div className="row">
         <div className="col-xs-12">
+          <div>
+            <button
+              className={styles.button}
+              type="button"
+              onClick={backHandlerButton}
+            >
+              Go back
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-12">
           <div className={styles.article}>
             <div className={styles.imageWrapper}>
               <h1 className={styles.loading}>Loading...</h1>
@@ -25,19 +38,6 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
               Written by {author} on {date}
             </h4>
             <p>{body}</p>
-          </div>
-        </div>
-      </div>
-      <div className="row end-xs">
-        <div className="col-xs-12">
-          <div>
-            <button
-              className={styles.button}
-              type="button"
-              onClick={backHandlerButton}
-            >
-              Go back
-            </button>
           </div>
         </div>
       </div>

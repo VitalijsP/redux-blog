@@ -37,6 +37,17 @@ const SwitchAccount: FC<Props> = ({ logoutHandler, loggedUser }) => {
           {loggedUser.userType ? 'Logout' : 'Login'}
         </button>
       </div>
+      {!loggedUser.userType && (
+        <div>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={logoutHandler}
+          >
+            Register
+          </button>
+        </div>
+      )}
     </div>
   );
 };

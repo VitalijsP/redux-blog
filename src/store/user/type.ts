@@ -17,4 +17,4 @@ export type LogoutUserAction = {
   type: string;
 };
 
-  export type AllActions = UserLoginAction
+export type AllActions = UserLoginAction;

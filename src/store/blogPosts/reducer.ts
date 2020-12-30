@@ -19,7 +19,7 @@ export const blogPostReducer = (state = initialState, action: AllActions) => {
     case DELETE_POSTS: {
       const clonedState = [...state];
       const indexId = clonedState.findIndex(
-        (item) => item.id === action.id
+        (item) => item.postId === action.id
       );
       clonedState.splice(indexId, 1);
       return clonedState;
@@ -27,7 +27,7 @@ export const blogPostReducer = (state = initialState, action: AllActions) => {
     case ADD_COMMENT: {
       const clonedState = cloneDeep(state);
       const postIndex = clonedState.findIndex(
-        (post) => post.id === action.newComment.id
+        (post) => post.postId === action.newComment.postId
       );
       // console.log('action.newComment', action.newComment);
       const comment = action.newComment;
@@ -39,7 +39,7 @@ export const blogPostReducer = (state = initialState, action: AllActions) => {
       const clonedState = cloneDeep(state);
       console.log(clonedState);
       const postIndex = clonedState.findIndex(
-        (post) => post.id === action.id
+        (post) => post.postId === action.id
       );
       const commentIndex = clonedState[postIndex].comments.findIndex(
         (comment) => comment.commentId === action.commentId

@@ -4,11 +4,10 @@ import search from '../../images/search.svg';
 
 type Props = {
   searchValue: string;
-  searchHandler: () => void;
   handleSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Search: FC<Props> = ({ searchValue, handleSearchValue, searchHandler }) => {
+const Search: FC<Props> = ({ searchValue, handleSearchValue }) => {
   return (
     <div className={styles.search_wrap}>
       <input
@@ -20,7 +19,7 @@ const Search: FC<Props> = ({ searchValue, handleSearchValue, searchHandler }) =>
         onChange={(e) => handleSearchValue(e)}
       />
       <div className={styles.buttonWrapper}>
-        <button
+        {/* <button
           className={styles.button}
           type="button"
           onClick={() => {
@@ -28,7 +27,7 @@ const Search: FC<Props> = ({ searchValue, handleSearchValue, searchHandler }) =>
           }}
         >
           <img src={search} alt="search" className={styles.icon} />
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 import styles from './card.module.scss';
 import { BlogPosts } from '../../store/blogPosts/type';
-import { blogPosts } from '../../data/data';
 import { RootState } from '../../store/store';
 
 type Props = {
@@ -18,16 +18,20 @@ const Card: FC<Props> = ({ post, deleteHandler, articleHandler }) => {
 
   return (
     <div key={postId} className={styles.card}>
-      <div className="row middle-xs">
-        <div className="col-xs-4 flex center-xs">
-          <img src={`${image}${postId}`} alt="" className={styles.image} />
+      <div className="row">
+        <div className="col-sm-4 col-xs-12 flex center-xs">
+          <div className={styles.imageWrapper}>
+            <img src={image} alt="" className={styles.image} />
+          </div>
         </div>
-        <div className="col-xs-8">
+        <div className="col-sm-8 col-xs-12">
           <div className="row">
             <div className="col-xs-12">
               <h3>{title}</h3>
               <p>{body.substring(0, 200)}...</p>
-              <p>{date}</p>
+              <p>
+                {moment.unix(date / 1000).format('MMMM Do YYYY, h:mm:ss a')}
+              </p>
               <p>
                 {category[0]}, {category[1]}
               </p>

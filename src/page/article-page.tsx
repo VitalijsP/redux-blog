@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { blogPosts } from '../data/data';
-import { BlogPosts } from '../store/blogPosts/type';
 import Article from '../components/article/article';
 import { RootState } from '../store/store';
 
@@ -11,7 +9,7 @@ const ArticlePage: FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
 
   const article = useSelector((state: RootState) =>
-    state.blogPosts.find((item) => item.id === articleId)
+    state.blogPosts.find((item) => item.postId === articleId)
   );
 
   const backHandler = () => {

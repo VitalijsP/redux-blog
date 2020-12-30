@@ -1,11 +1,14 @@
 import React, { FC, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import RegistrationForm from '../components/registration-form/registration-form';
+import { UserType } from '../data/users';
 
 const Registration: FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordlValue] = useState('');
   const [password2Value, setPassword2lValue] = useState('');
+  const history = useHistory();
 
   const handleEmailValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
@@ -20,16 +23,29 @@ const Registration: FC = () => {
     setPassword2lValue(e.target.value);
   };
 
-  const userRegisterHandler = () => {
-    if (!emailValue || !nameValue || !passwordValue || !password2Value) {
-      alert('Some fields are empty!');
+  const userRegisterHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (passwordValue !== password2Value) {
+      alert('password doesnt match');
       return;
     }
-    console.log(emailValue, nameValue, passwordValue, password2Value);
+
+    const newUser: UserType = {
+      email: emailValue,
+      userName: nameValue,
+      pasword: passwordValue,
+      userType: 'user',
+    };
+    const localUsers = JSON.parse(localStorage.usersRedux || '[]');
+    localUsers.push(newUser);
+    localStorage.usersRedux = JSON.stringify(localUsers);
+
+
     setEmailValue('');
     setNameValue('');
     setPasswordlValue('');
     setPassword2lValue('');
+    history.push('/home');
   };
   return (
     <div>
