@@ -1,0 +1,26 @@
+.userWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  padding-left: 10px;
+}
+
+.welcomeText {
+    font-size:18px;
+    justify-items: bottom;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;;
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
