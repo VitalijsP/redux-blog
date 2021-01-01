@@ -1,9 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import styles from './new-article-form.module.scss';
-import { categories } from '../data/data';
 import { RootState } from '../store/store';
 import { BlogPosts } from '../store/blogPosts/type';
 import { editPostAction } from '../store/blogPosts/action';

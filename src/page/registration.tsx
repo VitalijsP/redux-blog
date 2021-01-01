@@ -26,7 +26,7 @@ const Registration: FC = () => {
   const userRegisterHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordValue !== password2Value) {
-      alert('password doesnt match');
+      alert('Password does not match!');
       return;
     }
 
@@ -40,13 +40,13 @@ const Registration: FC = () => {
     localUsers.push(newUser);
     localStorage.usersRedux = JSON.stringify(localUsers);
 
-
     setEmailValue('');
     setNameValue('');
     setPasswordlValue('');
     setPassword2lValue('');
     history.push('/home');
   };
+  
   return (
     <div>
       <RegistrationForm

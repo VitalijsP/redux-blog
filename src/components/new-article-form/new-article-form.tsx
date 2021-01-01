@@ -1,21 +1,11 @@
 /* eslint-disable react/jsx-curly-newline */
 import React, { FC, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import styles from './new-article-form.module.scss';
 import { categories } from '../../data/data';
 import { RootState } from '../../store/store';
-import { BlogPosts } from '../../store/blogPosts/type';
-import { addNewPostAction } from '../../store/blogPosts/action';
-// type Props = {
-//   value: string;
 
-//   onSelectHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-//   titleValueHandler: (e: React.FormEvent<HTMLLabelElement>) => void;
-//   bodyValueHandler: (e: React.FormEvent<HTMLLabelElement>) => void;
-//   imageValueHandler: (e: React.FormEvent<HTMLLabelElement>) => void;
-// };
 type Props = {
   label: string;
   submitHandler: (
@@ -40,13 +30,13 @@ const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
   const { articleId } = useParams<{ articleId: string }>();
 
   useEffect(() => {
-    const Article = posts.find((article) => article.postId === articleId);
-    if (Article) {
-      setTitle(Article?.title);
-      setBody(Article?.body);
-      setImage(Article?.image);
-      setSelectedOption1(Article?.category[0]);
-      setSelectedOption2(Article?.category[1]);
+    const article = posts.find((article) => article.postId === articleId);
+    if (article) {
+      setTitle(article.title);
+      setBody(article.body);
+      setImage(article.image);
+      setSelectedOption1(article.category[0]);
+      setSelectedOption2(article.category[1]);
     }
   }, []);
 

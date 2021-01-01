@@ -1,14 +1,14 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useEffect } from 'react';
 import { sampleSize } from 'lodash';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { BlogPosts } from '../../store/blogPosts/type';
 import Comment from '../comments/comments';
 import styles from './article.module.scss';
 import SmallCard from '../small-card/small-card';
-import { smallCardData } from '../../data/data';
+import { UserType } from '../../store/user/type';
 
 type Props = {
   article: BlogPosts;
@@ -19,7 +19,13 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
   const { title, body, image, author, date, postId } = article;
   const history = useHistory();
 
-  const sameCategoryPosts= useRef(
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [postId]);
+
+  const user: UserType = useSelector((state: RootState) => state.userInfo);
+
+  const sameCategoryPosts = useRef(
     sampleSize(
       useSelector((state: RootState) =>
         state.blogPosts.filter((eachPost) =>
@@ -47,9 +53,11 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
           </button>
         </div>
         <div className="col-xs-6 flex end-xs">
-          <button className={styles.button} type="button" onClick={editHandler}>
-            Edit
-          </button>
+          {user.userName?.toLowerCase() === article.author.toLowerCase() && (
+            <button className={styles.button} type="button" onClick={editHandler}>
+              Edit
+            </button>
+          )}
         </div>
       </div>
       <div className="row">
@@ -70,7 +78,12 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
       <div className="row">
         {sameCategoryPosts.current.map((post) => (
           <div key={post.postId} className="col-md-4 col-sm-6 col-xs-12">
-            <SmallCard title={post.title} body={post.body} image={post.image} articleHandler={() => articleHandler(post.postId)} />
+            <SmallCard
+              title={post.title}
+              body={post.body}
+              image={post.image}
+              articleHandler={() => articleHandler(post.postId)}
+            />
           </div>
         ))}
       </div>

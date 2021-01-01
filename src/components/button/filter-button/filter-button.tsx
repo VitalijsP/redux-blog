@@ -10,12 +10,7 @@ const FilterButton: FC<Props> = ({ label, chosenCategoryHandler }) => {
   return (
     <div className={styles.filterButtonWrapper}>
       <div className="col-xs-12">
-        <button
-          key={label}
-          type="button"
-          className={styles.filerButton}
-          onClick={chosenCategoryHandler}
-        >
+        <button key={label} type="button" className={styles.filerButton} onClick={chosenCategoryHandler}>
           # {label}
         </button>
       </div>

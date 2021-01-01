@@ -21,8 +21,10 @@ const SmallCard: FC<Props> = ({ title, body, image, articleHandler }) => {
       </div>
       <div className="row">
         <div className="col-xs-12">
-          <h3 className={styles.title}>{title}</h3>
-          <p className={styles.body}>{body.substring(0, 100)}...</p>
+          <div className= {styles.text}>
+            <h3 className={styles.title}>{title}</h3>
+            <p className={styles.body}>{body.substring(0, 100)}...</p>
+          </div>
           <div className="row end-xs">
             <div className="col-xs-12">
               <button type="button" className={styles.buttonReadMore} onClick={articleHandler}>

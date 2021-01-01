@@ -32,10 +32,10 @@ $LavenderWeb-hover: #dee2ff;
   justify-content: center;
   align-items: center;
   padding-top: 100%;
-  width:100%;
+  width: 100%;
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .image {
@@ -53,6 +53,12 @@ $LavenderWeb-hover: #dee2ff;
   text-align: center;
 }
 
+.text {
+  position: relative;
+  // height: 100%;
+  // bottom:20px;
+}
+
 .title {
   text-align: justify;
   margin-bottom: 10px;
@@ -62,10 +68,11 @@ $LavenderWeb-hover: #dee2ff;
 .body {
   text-align: justify;
   margin-bottom: 8px;
+
 }
 
-.buttonReadMore {
 
+.buttonReadMore {
   display: block;
   background: none;
   border: none;

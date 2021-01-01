@@ -20,6 +20,9 @@ const Home: FC = () => {
 
   const loggedUser = useSelector((state: RootState) => state.userInfo);
 
+  const posts = useSelector((store: RootState) => store.blogPosts);
+  console.log(posts);
+  
   const logoutHandler = () => {
     dispatch(logoutUserAction());
     history.push('/login');
@@ -36,9 +39,7 @@ const Home: FC = () => {
   const deleteHandler = (id: string) => {
     dispatch(deletePostAction(id));
   };
-  const posts = useSelector((store: RootState) => store.blogPosts);
-  console.log(posts);
-  
+
   const articleHandler = (id: string) => {
     history.push(`/article/${id}`);
   };
@@ -51,7 +52,8 @@ const Home: FC = () => {
     if (chosenCategory === 'All') {
       return true;
     }
-    return postCategories.some((eachCategory) => eachCategory === chosenCategory);
+    const showPost = postCategories.some((eachCategory) => eachCategory === chosenCategory);
+    return showPost
   };
 
   const chosenCategoryHandler = (category: string) => {

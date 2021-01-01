@@ -2,10 +2,7 @@ import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './comments.module.scss';
 import { Comments } from '../../store/blogPosts/type';
-import {
-  addCommentAction,
-  deleteCommentAction,
-} from '../../store/blogPosts/action';
+import { addCommentAction, deleteCommentAction } from '../../store/blogPosts/action';
 import { RootState } from '../../store/store';
 
 type Props = {
@@ -74,14 +71,13 @@ const Comment: FC<Props> = ({ comments, postId }) => {
               </div>
             );
           })}
-          {loggedUser.email && (
+          {loggedUser.userType && (
             <div className={styles.input_wrap}>
               <div className="row middle-xs margin-bottom--8">
                 <div className="col-xs-12">
                   <form action="">
                     <input
                       type="text"
-                      id="password"
                       value={value}
                       className={styles.input}
                       placeholder="Write Your comment here..."

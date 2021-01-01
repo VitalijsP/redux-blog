@@ -14,8 +14,6 @@ const ArticlePage: FC = () => {
     history.push('/home');
   };
 
-
-
   return (
     <section>
       <div className="container">

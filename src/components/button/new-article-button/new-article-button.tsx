@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
 import styles from './new-article-button.module.scss';
 
 type Props = {

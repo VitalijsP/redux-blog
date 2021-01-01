@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styles from './search.module.scss';
-import search from '../../images/search.svg';
 
 type Props = {
   searchValue: string;

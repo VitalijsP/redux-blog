@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { sampleSize, random } from 'lodash';
+import { sampleSize } from 'lodash';
 import axios from 'axios';
 import {
   BlogPosts,
@@ -28,13 +28,13 @@ export const deletePostAction = (id: string) => {
   };
 };
 
-export const addNewPostAction = (post : BlogPosts) => {
+export const addNewPostAction = (post: BlogPosts) => {
   return {
     type: ADD_NEW_POST,
     post,
   };
 };
-export const editPostAction = (post : BlogPosts) => {
+export const editPostAction = (post: BlogPosts) => {
   return {
     type: EDIT_POST,
     post,
@@ -59,24 +59,25 @@ export const deleteCommentAction = (commentId: string, id: string) => {
 export const getPostsData = () => {
   return async (dispatch: Dispatch) => {
     axios.get('https://jsonplaceholder.typicode.com/posts').then(({ data }) => {
-      console.log('data axios:', data);
-      const posts:BlogPosts[] = data.map((post:{ id: number, title: string, body: string}) => ({
+      const posts: BlogPosts[] = data.map((post: { id: number; title: string; body: string }) => ({
         postId: `${post.id}`,
         title: post.title,
         body: postBody(post.body),
         author: randomAuthor(),
         date: Date.now(),
-        image: `https://picsum.photos/id/${post.id+10}/400/300`,
+        image: `https://picsum.photos/id/${post.id + 10}/400/300`,
         category: sampleSize(categories, 2),
         comments: [],
       }));
       axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
-        const comments:Comments[] = res.data.map((comment: {postId: number, id:number, body:string, email:string, }) => ({
-          postId: `${comment.postId}`,
-          commentId: `${comment.id}`,
-          email: comment.email,
-          body: comment.body,
-        }));
+        const comments: Comments[] = res.data.map(
+          (comment: { postId: number; id: number; body: string; email: string }) => ({
+            postId: `${comment.postId}`,
+            commentId: `${comment.id}`,
+            email: comment.email,
+            body: comment.body,
+          }),
+        );
         posts.forEach((post: BlogPosts) => {
           comments.forEach((comment: Comments) => {
             if (post.postId === comment.postId) {
