@@ -9,7 +9,7 @@ type Props = {
 
 const Search: FC<Props> = ({ searchValue, handleSearchValue }) => {
   return (
-    <div className={styles.search_wrap}>
+    <div className={styles.searchWrap}>
       <input
         type="text"
         id="search"
@@ -18,17 +18,6 @@ const Search: FC<Props> = ({ searchValue, handleSearchValue }) => {
         placeholder="search"
         onChange={(e) => handleSearchValue(e)}
       />
-      <div className={styles.buttonWrapper}>
-        {/* <button
-          className={styles.button}
-          type="button"
-          onClick={() => {
-            searchHandler();
-          }}
-        >
-          <img src={search} alt="search" className={styles.icon} />
-        </button> */}
-      </div>
     </div>
   );
 };

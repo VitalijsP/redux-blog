@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './login-form.module.scss';
 import logo from '../../images/logo.png';
 
@@ -17,18 +18,28 @@ const LoginForm: FC<Props> = ({
   handlePasswordValue,
   userSignInHandler,
 }) => {
+  const history = useHistory();
+  const goHomeHandler = () => {
+    history.push('/home');
+  };
+
+
   return (
     <section>
       <div className="container">
         <div className="row middle-xs margin-bottom--16">
-          <div className="col-xs-2 col-xs-offset-5">
-            <div className={styles.logo_wrapper}>
+          <div className="col-xs-4 col-xs-offset-4">
+            <button 
+              type="button" 
+              className={styles.logoWrapper} 
+              onClick={() => goHomeHandler()}
+            >
               <img src={logo} width="300px" alt="" />
-            </div>
+            </button>
           </div>
         </div>
         <div className="row">
-          <div className="col-xs-2 col-xs-offset-5">
+          <div className="col-xs-4 col-xs-offset-4">
             <form action="">
               <input
                 type="email"
@@ -47,11 +58,7 @@ const LoginForm: FC<Props> = ({
                 onChange={(e) => handlePasswordValue(e)}
               />
             </form>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={userSignInHandler}
-            >
+            <button type="button" className={styles.button} onClick={userSignInHandler}>
               Sign in
             </button>
           </div>
