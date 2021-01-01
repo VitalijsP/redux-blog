@@ -3,23 +3,40 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { RootState } from '../store/store';
 import { categories } from '../data/data';
-import { getPostsData, deletePostAction } from '../store/blogPosts/action';
+import { deletePostAction } from '../store/blogPosts/action';
 import Card from '../components/card/card';
 import Search from '../components/search/search';
-import FilterButton from '../components/filter-button/filter-button';
+import FilterButton from '../components/button/filter-button/filter-button';
+import SwitchAccount from '../components/switch/switch';
+import { logoutUserAction } from '../store/user/action';
+import NewArticleButton from '../components/button/new-article-button/new-article-button';
 
 const Home: FC = () => {
   const [chosenCategory, setChosenCategory] = useState('All');
   const [searchValue, setSearchValue] = useState('');
 
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const loggedUser = useSelector((state: RootState) => state.userInfo);
+
+  const logoutHandler = () => {
+    dispatch(logoutUserAction());
+    history.push('/login');
+  };
+
+  const newArticleHandler = () => {
+    history.push('/new-article');
+  };
+
+  const registerHandler = () => {
+    history.push('/registration');
+  };
 
   const deleteHandler = (id: string) => {
     dispatch(deletePostAction(id));
   };
-
   const posts = useSelector((store: RootState) => store.blogPosts);
-  const history = useHistory();
   const articleHandler = (id: string) => {
     history.push(`/article/${id}`);
   };
@@ -28,14 +45,11 @@ const Home: FC = () => {
     setSearchValue(e.target.value);
   };
 
-
   const sortPostCategory = (postCategories: string[]) => {
     if (chosenCategory === 'All') {
       return true;
     }
-    return postCategories.some(
-      (eachCategory) => eachCategory === chosenCategory
-    );
+    return postCategories.some((eachCategory) => eachCategory === chosenCategory);
   };
 
   const chosenCategoryHandler = (category: string) => {
@@ -46,15 +60,16 @@ const Home: FC = () => {
     <div className="container">
       <div className="row">
         <div className="col-xs-8 col-xs-offset-2">
-          <Search
-            searchValue={searchValue}
-            handleSearchValue={handleSearchValue}
-          />
-          <div className="row">
-            <FilterButton
-              label='All'
-              chosenCategoryHandler={() => chosenCategoryHandler('All')}
-            />
+          <div className="row end-xs">
+            <div className="col-xs-6">
+              <Search searchValue={searchValue} handleSearchValue={handleSearchValue} />
+            </div>
+            <div className="col-xs-6">
+              <SwitchAccount registerHandler={registerHandler} logoutHandler={logoutHandler} loggedUser={loggedUser} />
+            </div>
+          </div>
+          <div className="row between-xs">
+            <FilterButton label="All" chosenCategoryHandler={() => chosenCategoryHandler('All')} />
             {categories.map((category) => (
               <FilterButton
                 key={category}
@@ -63,20 +78,29 @@ const Home: FC = () => {
               />
             ))}
           </div>
+          <div className="row end-xs">
+            {loggedUser.userType && (
+              <div className="col-xs-12">
+                <NewArticleButton newArticleHandler={() => newArticleHandler()} />
+              </div>
+            )}
+          </div>
           <div className="row">
-            {posts.filter(post => post.title.toLowerCase().includes(searchValue.toLowerCase())).map((post) => {
-              return (
-                sortPostCategory(post.category) && (
-                  <div className="col-xs-12" key={post.postId}>
-                    <Card
-                      post={post}
-                      deleteHandler={() => deleteHandler(post.postId)}
-                      articleHandler={() => articleHandler(post.postId)}
-                    />
-                  </div>
-                )
-              );
-            })}
+            {posts
+              .filter((post) => post.title.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((post) => {
+                return (
+                  sortPostCategory(post.category) && (
+                    <div className="col-xs-12" key={post.postId}>
+                      <Card
+                        post={post}
+                        deleteHandler={() => deleteHandler(post.postId)}
+                        articleHandler={() => articleHandler(post.postId)}
+                      />
+                    </div>
+                  )
+                );
+              })}
           </div>
         </div>
       </div>

@@ -1,15 +1,15 @@
 .userWrapper {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
 }
 
 .avatar {
   padding-left: 10px;
+  margin-right: 4px 10px;
 }
 
 .welcomeText {
     font-size:18px;
-    justify-items: bottom;
+    margin-bottom: 4px;
 }
 
 .button {
@@ -18,7 +18,7 @@
     font-size: 16px;
     cursor: pointer;
     padding: 4px 8px;
-    border-radius: 4px;;
+    border-radius: 4px;
 }
 
 .button:hover {

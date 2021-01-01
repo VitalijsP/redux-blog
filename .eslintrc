@@ -15,7 +15,6 @@
     },
     "rules": {
       "jsx-a11y/label-has-associated-control": 0,
-       "object-curly-spacing": ["warn", "always"],
       "no-unused-vars": [
         "warn",
         {
@@ -39,7 +38,7 @@
       "max-len": [
         "warn",
         {
-          "code": 80,
+          "code": 120,
           "ignoreStrings": true,
           "ignoreTemplateLiterals": true,
           "ignoreComments": true

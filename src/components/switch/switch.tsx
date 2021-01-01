@@ -8,10 +8,10 @@ import { UserType } from '../../store/user/type';
 type Props = {
   loggedUser: UserType;
   logoutHandler: () => void;
+  registerHandler: () => void
 };
 
-const SwitchAccount: FC<Props> = ({ logoutHandler, loggedUser }) => {
-  console.log('loggedUser:', loggedUser);
+const SwitchAccount: FC<Props> = ({ registerHandler, logoutHandler, loggedUser }) => {
 
   return (
     <div className={styles.userWrapper}>
@@ -39,11 +39,7 @@ const SwitchAccount: FC<Props> = ({ logoutHandler, loggedUser }) => {
       </div>
       {!loggedUser.userType && (
         <div>
-          <button
-            type="button"
-            className={styles.button}
-            onClick={logoutHandler}
-          >
+          <button type="button" className={styles.button} onClick={registerHandler}>
             Register
           </button>
         </div>

@@ -1,69 +1,88 @@
-$Manatee: #8e9aaffd; // pelēcīgi zila body background-color
-$LanguidLavender: #CBC0D3; // gaiši violeta
-$PalePink: #EFD3D7; // pelēcīgi rozā card border-color
-$PalePurplePantone: #FEEAFA; // gaiši rozā
-$LavenderWeb: #DEE2FF; // gaiši zila card background-color
+$BlackShadow-020: #00000033;
+$BrownBorder: #535353;
+$ButtonBackground-050: #f5f5f580;
+$ButtonBackground-010: #0000001a;
+$ButtonText-070: #000000b3;
+$ButtonBackground-hover: #dfdbdb;
+$AllmostWhite: #f5f5f5;
+$LavenderWeb-hover: #dee2ff;
 
 .articleWrapper {
-    display: block;
-    height: 100%;
-    background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 4px;
-    border: 1px solid $PalePink;
-    overflow: hidden;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  height: 100%;
+  background-color: $AllmostWhite;
+  padding: 30px;
+  border-radius: 4px;
+  border: 1px solid $BrownBorder;
+  overflow: hidden;
+  box-shadow: 0 10px 10px 0 $BlackShadow-020;
 }
 
 .article {
-    margin-bottom: 50px;
-    padding: 10px;
+  margin-bottom: 50px;
+  padding: 10px;
 }
 
 .imageWrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 60%;
-    width:100%;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom:20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60%;
+  width: 100%;
+  border-radius: 100px 4px 100px 4px;
+  overflow: hidden;
+  margin-bottom: 40px;
 }
 
 .image {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .loading {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    text-align: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
 
 .title {
-    margin-bottom: 8px;
+  text-align: justify;
+  margin-bottom: 12px;
+}
+
+.subTitle {
+  margin-bottom: 20px;
+  color: $ButtonText-070;
+}
+
+.body {
+  text-align: justify;
+  line-height: 1.5;
 }
 
 .button {
-    height: 30px;
-    background-color: rgba(245, 245, 245, 0.534);
-    border-radius: 6px;
-    border: 1px solid #535353;
-    color:#535353;
-    cursor: pointer;
-    font-size: 14px;
-    justify-content: center;
-    padding: 8px;
+  height: 30px;
+  width: 100px;
+  background-color: $ButtonBackground-050;
+  border-radius: 6px;
+  border: 1px solid $BrownBorder;
+  color: $BrownBorder;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px;
+  margin: 20px 12px;
 }
 
 .button:hover {
-    background-color: rgb(223, 219, 219);
-    color:black;
+  background-color: rgb(223, 219, 2);
+  color: black;
+}
+
+.flex {
+  display: flex;
 }

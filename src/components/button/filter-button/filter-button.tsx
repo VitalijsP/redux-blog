@@ -2,17 +2,16 @@ import React, { FC } from 'react';
 import styles from './filter-button.module.scss';
 
 type Props = {
-  key?: string;
   label: string;
   chosenCategoryHandler: () => void;
 };
 
-const FilterButton: FC<Props> = ({ key, label, chosenCategoryHandler }) => {
+const FilterButton: FC<Props> = ({ label, chosenCategoryHandler }) => {
   return (
-    <div>
+    <div className={styles.filterButtonWrapper}>
       <div className="col-xs-12">
         <button
-          key={key}
+          key={label}
           type="button"
           className={styles.filerButton}
           onClick={chosenCategoryHandler}

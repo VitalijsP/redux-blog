@@ -21,33 +21,28 @@ const Card: FC<Props> = ({ post, deleteHandler, articleHandler }) => {
       <div className="row">
         <div className="col-sm-4 col-xs-12 flex center-xs">
           <div className={styles.imageWrapper}>
+            <h1 className={styles.loading}>Loading...</h1>
             <img src={image} alt="" className={styles.image} />
           </div>
         </div>
         <div className="col-sm-8 col-xs-12">
           <div className="row">
             <div className="col-xs-12">
-              <h3>{title}</h3>
-              <p>{body.substring(0, 200)}...</p>
-              <p>
-                {moment.unix(date / 1000).format('MMMM Do YYYY, h:mm:ss a')}
-              </p>
-              <p>
+              <h3 className={styles.title}>{title}</h3>
+              <p className={styles.subTitle}>{moment.unix(date / 1000).format('MMMM Do YYYY, h:mm:ss a')}</p>
+              <p className={styles.body}>{body.substring(0, 200)}...</p>
+              <p className={styles.body}>
                 {category[0]}, {category[1]}
               </p>
             </div>
           </div>
           <div className="row end-xs">
             <div className="col-xs-12">
-              <button
-                type="button"
-                className={styles.btn}
-                onClick={articleHandler}
-              >
-                <span className={styles.btn_text}>Read more...</span>
+              <button type="button" className={styles.buttonReadMore} onClick={articleHandler}>
+                <span className={styles.buttonText}>Read more...</span>
               </button>
               {loggedUser === 'admin' && (
-                <button type="button" onClick={deleteHandler}>
+                <button type="button" className={styles.button} onClick={deleteHandler}>
                   <span>Delete</span>
                 </button>
               )}

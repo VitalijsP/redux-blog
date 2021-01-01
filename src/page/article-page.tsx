@@ -8,13 +8,13 @@ const ArticlePage: FC = () => {
   const history = useHistory();
   const { articleId } = useParams<{ articleId: string }>();
 
-  const article = useSelector((state: RootState) =>
-    state.blogPosts.find((item) => item.postId === articleId)
-  );
+  const article = useSelector((state: RootState) => state.blogPosts.find((item) => item.postId === articleId));
 
   const backHandler = () => {
     history.push('/home');
   };
+
+  const editHandler = () => {console.log('editHandler clicked')};
 
   return (
     <section>
@@ -22,10 +22,7 @@ const ArticlePage: FC = () => {
         <div className="row">
           <div className="col-xs-8 col-xs-offset-2">
             {article && (
-              <Article
-                backHandlerButton={() => backHandler()}
-                article={article}
-              />
+              <Article backHandlerButton={() => backHandler()} editHandler={() => editHandler()} article={article} />
             )}
           </div>
         </div>
