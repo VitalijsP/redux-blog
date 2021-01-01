@@ -19,7 +19,8 @@ const Login: FC = () => {
     setPasswordlValue(e.target.value);
   };
 
-  const userSignInHandler = () => {
+  const userSignInHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!emailValue || !passwordValue) {
       alert('Some fields are empty!');
       return;
@@ -46,7 +47,7 @@ const Login: FC = () => {
         passwordValue={passwordValue}
         handleEmailValue={handleEmailValue}
         handlePasswordValue={handlePasswordValue}
-        userSignInHandler={() => userSignInHandler()}
+        userSignInHandler={(e) => userSignInHandler(e)}
       />
     </div>
   );

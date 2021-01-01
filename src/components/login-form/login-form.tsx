@@ -8,7 +8,7 @@ type Props = {
   passwordValue: string;
   handleEmailValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePasswordValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  userSignInHandler: () => void;
+  userSignInHandler: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 const LoginForm: FC<Props> = ({
@@ -23,24 +23,19 @@ const LoginForm: FC<Props> = ({
     history.push('/home');
   };
 
-
   return (
     <section>
       <div className="container">
         <div className="row middle-xs margin-bottom--16">
           <div className="col-xs-4 col-xs-offset-4">
-            <button 
-              type="button" 
-              className={styles.logoWrapper} 
-              onClick={() => goHomeHandler()}
-            >
+            <button type="button" className={styles.logoWrapper} onClick={() => goHomeHandler()}>
               <img src={logo} width="300px" alt="" />
             </button>
           </div>
         </div>
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <form action="">
+            <form action="" onSubmit={userSignInHandler}>
               <input
                 type="email"
                 id="email"
@@ -57,10 +52,10 @@ const LoginForm: FC<Props> = ({
                 placeholder="Password"
                 onChange={(e) => handlePasswordValue(e)}
               />
+              <button type="submit" className={styles.button}>
+                Sign in
+              </button>
             </form>
-            <button type="button" className={styles.button} onClick={userSignInHandler}>
-              Sign in
-            </button>
           </div>
         </div>
       </div>

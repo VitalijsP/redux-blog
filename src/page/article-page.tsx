@@ -14,7 +14,7 @@ const ArticlePage: FC = () => {
     history.push('/home');
   };
 
-  const editHandler = () => {console.log('editHandler clicked')};
+
 
   return (
     <section>
@@ -22,7 +22,7 @@ const ArticlePage: FC = () => {
         <div className="row">
           <div className="col-xs-8 col-xs-offset-2">
             {article && (
-              <Article backHandlerButton={() => backHandler()} editHandler={() => editHandler()} article={article} />
+              <Article backHandlerButton={() => backHandler()} article={article} />
             )}
           </div>
         </div>

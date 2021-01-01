@@ -1,12 +1,14 @@
 import { Dispatch } from 'redux';
-import { sampleSize } from 'lodash';
+import { sampleSize, random } from 'lodash';
 import axios from 'axios';
 import {
   BlogPosts,
   ADD_POSTS,
   DELETE_POSTS,
   ADD_COMMENT,
+  ADD_NEW_POST,
   DELETE_COMMENT,
+  EDIT_POST,
   Comments,
 } from './type';
 import { categories } from '../../data/data';
@@ -23,6 +25,19 @@ export const deletePostAction = (id: string) => {
   return {
     type: DELETE_POSTS,
     id,
+  };
+};
+
+export const addNewPostAction = (post : BlogPosts) => {
+  return {
+    type: ADD_NEW_POST,
+    post,
+  };
+};
+export const editPostAction = (post : BlogPosts) => {
+  return {
+    type: EDIT_POST,
+    post,
   };
 };
 

@@ -8,6 +8,7 @@ import Login from './page/login';
 import Registration from './page/registration';
 import { usersData } from './data/users';
 import NewArticle from './page/create-article-page';
+import EditArticle from './page/edit-article-page';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,13 @@ const App: FC = () => {
         <Route exact path="/new-article">
           <NewArticle />
         </Route>
-        <Route path="/home">
+        <Route exact path="/edit-article/:articleId">
+          <EditArticle />
+        </Route>
+        <Route exact path="/home">
+          <Home />
+        </Route>
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

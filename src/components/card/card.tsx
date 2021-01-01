@@ -21,7 +21,7 @@ const Card: FC<Props> = ({ post, deleteHandler, articleHandler }) => {
       <div className="row">
         <div className="col-sm-4 col-xs-12 flex center-xs">
           <div className={styles.imageWrapper}>
-            <h1 className={styles.loading}>Loading...</h1>
+            {/* <h1 className={styles.loading}>Loading...</h1> */}
             <img src={image} alt="" className={styles.image} />
           </div>
         </div>

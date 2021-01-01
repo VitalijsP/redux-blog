@@ -1,9 +1,13 @@
-import React, { FC, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+/* eslint-disable react/jsx-curly-newline */
+import React, { FC, useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import styles from './new-article-form.module.scss';
 import { categories } from '../../data/data';
-import { UserType } from '../../store/user/type';
-
+import { RootState } from '../../store/store';
+import { BlogPosts } from '../../store/blogPosts/type';
+import { addNewPostAction } from '../../store/blogPosts/action';
 // type Props = {
 //   value: string;
 
@@ -14,16 +18,38 @@ import { UserType } from '../../store/user/type';
 // };
 type Props = {
   label: string;
+  submitHandler: (
+    e: React.FormEvent<HTMLFormElement>,
+    title: string,
+    body: string,
+    image: string,
+    selectedOption1: string,
+    selectedOption2: string,
+  ) => void;
 };
 
-const NewArticleForm: FC<Props> = ({label}) => {
+const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [image, setImage] = useState('');
-  const [selectedOption1, setSelectedOption1] = useState('Select category 1');
-  const [selectedOption2, setSelectedOption2] = useState('Select category 2');
+  const [image, setImage] = useState('https://picsum.photos/200/300');
+  const [selectedOption1, setSelectedOption1] = useState('Sport');
+  const [selectedOption2, setSelectedOption2] = useState('Cars');
 
+  const posts = useSelector((state: RootState) => state.blogPosts);
   const history = useHistory();
+  const { articleId } = useParams<{ articleId: string }>();
+
+  useEffect(() => {
+    const Article = posts.find((article) => article.postId === articleId);
+    if (Article) {
+      setTitle(Article?.title);
+      setBody(Article?.body);
+      setImage(Article?.image);
+      setSelectedOption1(Article?.category[0]);
+      setSelectedOption2(Article?.category[1]);
+    }
+  }, []);
+
   const goBackHandler = () => {
     history.push('/home');
   };
@@ -35,7 +61,11 @@ const NewArticleForm: FC<Props> = ({label}) => {
           <h1 className={styles.title}>{label}</h1>
         </div>
       </div>
-      <form>
+      <form
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+          submitHandler(e, title, body, image, selectedOption1, selectedOption2)
+        }
+      >
         <div className="row">
           <div className="col-xs-4">
             <input
@@ -44,6 +74,7 @@ const NewArticleForm: FC<Props> = ({label}) => {
               placeholder="Title"
               className={styles.inputField}
               value={title}
+              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
             />
             <input
@@ -91,6 +122,7 @@ const NewArticleForm: FC<Props> = ({label}) => {
             <div className={styles.scroller}>
               <textarea
                 name=""
+                required
                 id="newArticle"
                 placeholder="My story starts here..."
                 className={styles.textarea}

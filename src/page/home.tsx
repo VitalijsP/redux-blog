@@ -37,6 +37,8 @@ const Home: FC = () => {
     dispatch(deletePostAction(id));
   };
   const posts = useSelector((store: RootState) => store.blogPosts);
+  console.log(posts);
+  
   const articleHandler = (id: string) => {
     history.push(`/article/${id}`);
   };
@@ -87,6 +89,7 @@ const Home: FC = () => {
           </div>
           <div className="row">
             {posts
+              .sort((post, nextPost) => nextPost.date - post.date)
               .filter((post) => post.title.toLowerCase().includes(searchValue.toLowerCase()))
               .map((post) => {
                 return (

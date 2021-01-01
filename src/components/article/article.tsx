@@ -1,6 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
+import { sampleSize } from 'lodash';
 import moment from 'moment';
-import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { RootState } from '../../store/store';
 import { BlogPosts } from '../../store/blogPosts/type';
 import Comment from '../comments/comments';
 import styles from './article.module.scss';
@@ -10,16 +13,29 @@ import { smallCardData } from '../../data/data';
 type Props = {
   article: BlogPosts;
   backHandlerButton: () => void;
-  editHandler: () => void;
 };
 
-const Article: FC<Props> = ({ editHandler, article, backHandlerButton }) => {
-  const { title, body, image, author, date } = article;
-
+const Article: FC<Props> = ({ article, backHandlerButton }) => {
+  const { title, body, image, author, date, postId } = article;
   const history = useHistory();
 
-  const articleHandler = () => {
-    history.push('`/article/${postID}`');
+  const sameCategoryPosts= useRef(
+    sampleSize(
+      useSelector((state: RootState) =>
+        state.blogPosts.filter((eachPost) =>
+          eachPost.category.some((category) => category === article.category[0] || category === article.category[1]),
+        ),
+      ),
+      3,
+    ),
+  );
+
+  const articleHandler = (smallPostId: string) => {
+    history.push(`/article/${smallPostId}`);
+  };
+
+  const editHandler = () => {
+    history.push(`/edit-article/${postId}`);
   };
 
   return (
@@ -31,11 +47,7 @@ const Article: FC<Props> = ({ editHandler, article, backHandlerButton }) => {
           </button>
         </div>
         <div className="col-xs-6 flex end-xs">
-          <button 
-            className={styles.button} 
-            type="button"
-            onClick={editHandler}  
-          >
+          <button className={styles.button} type="button" onClick={editHandler}>
             Edit
           </button>
         </div>
@@ -56,9 +68,9 @@ const Article: FC<Props> = ({ editHandler, article, backHandlerButton }) => {
         </div>
       </div>
       <div className="row">
-        {smallCardData.map(({ title1, body1, image1, id1 }) => (
-          <div key={id1} className="col-md-4 col-sm-6 col-xs-12">
-            <SmallCard title={title1} body={body1} image={image1} articleHandler={articleHandler} />
+        {sameCategoryPosts.current.map((post) => (
+          <div key={post.postId} className="col-md-4 col-sm-6 col-xs-12">
+            <SmallCard title={post.title} body={post.body} image={post.image} articleHandler={() => articleHandler(post.postId)} />
           </div>
         ))}
       </div>
