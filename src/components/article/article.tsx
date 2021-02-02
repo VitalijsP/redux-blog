@@ -1,21 +1,23 @@
-import React, { FC, useRef, useEffect } from 'react';
 import { sampleSize } from 'lodash';
 import moment from 'moment';
+import React, { FC, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import { BlogPost } from '../../store/blogPost/type';
 import { RootState } from '../../store/store';
-import { BlogPosts } from '../../store/blogPosts/type';
-import Comment from '../comments/comments';
-import styles from './article.module.scss';
-import SmallCard from '../small-card/small-card';
 import { UserType } from '../../store/user/type';
+import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { SmallCard } from '../card/small-card/small-card';
+import { Comments } from '../comments/comments';
+import styles from './article.module.scss';
 
 type Props = {
-  article: BlogPosts;
+  article: BlogPost;
   backHandlerButton: () => void;
 };
 
-const Article: FC<Props> = ({ article, backHandlerButton }) => {
+export const Article: FC<Props> = ({ article, backHandlerButton }) => {
   const { title, body, image, author, date, postId } = article;
   const history = useHistory();
 
@@ -47,16 +49,10 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
   return (
     <div className={styles.articleWrapper}>
       <div className="row">
-        <div className="col-xs-6">
-          <button className={styles.button} type="button" onClick={backHandlerButton}>
-            Go back
-          </button>
-        </div>
-        <div className="col-xs-6 flex end-xs">
+        <div className="col-xs-12 flex between-xs">
+          <RegularButton type="button" label="Go back" actionHandler={backHandlerButton} />
           {user.userName?.toLowerCase() === article.author.toLowerCase() && (
-            <button className={styles.button} type="button" onClick={editHandler}>
-              Edit
-            </button>
+            <RegularButton type="button" label="Edit" actionHandler={editHandler} />
           )}
         </div>
       </div>
@@ -67,7 +63,9 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
               <h1 className={styles.loading}>Loading...</h1>
               <img src={image} className={styles.image} alt="" />
             </div>
-            <h2 className={styles.title}>{title}</h2>
+            <h2 className={styles.title}>
+              {title} /{article.category[0]}, {article.category[1]}
+            </h2>
             <h4 className={styles.subTitle}>
               Written by {author} on {moment.unix(date / 1000).format('MMMM Do YYYY, h:mm:ss a')}
             </h4>
@@ -77,11 +75,12 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
       </div>
       <div className="row">
         {sameCategoryPosts.current.map((post) => (
-          <div key={post.postId} className="col-md-4 col-sm-6 col-xs-12">
+          <div key={post.postId} className="col-md-4 col-sm-6 col-xs-12 margin-bottom--16">
             <SmallCard
               title={post.title}
               body={post.body}
               image={post.image}
+              category={post.category}
               articleHandler={() => articleHandler(post.postId)}
             />
           </div>
@@ -89,11 +88,9 @@ const Article: FC<Props> = ({ article, backHandlerButton }) => {
       </div>
       <div className="row">
         <div className="col-xs-12">
-          <Comment comments={article.comments} postId={article.postId} />
+          <Comments comments={article.comments} postId={article.postId} />
         </div>
       </div>
     </div>
   );
 };
-
-export default Article;

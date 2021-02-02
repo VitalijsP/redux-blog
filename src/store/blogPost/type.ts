@@ -1,11 +1,11 @@
-export const ADD_POSTS = 'ADD_POSTS';
-export const DELETE_POSTS = 'DELETE_POSTS';
+export const ADD_POST = 'ADD_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_NEW_POST = 'ADD_NEW_POST';
 export const EDIT_POST = 'EDIT_POST';
 
-export type BlogPosts = {
+export type BlogPost = {
   postId: string;
   title: string;
   body: string;
@@ -13,10 +13,10 @@ export type BlogPosts = {
   date: number;
   image: string;
   category: string[];
-  comments: Comments[];
+  comments: Comment[];
 };
 
-export type Comments = {
+export type Comment = {
   postId: string;
   commentId: string;
   email: string;
@@ -24,26 +24,26 @@ export type Comments = {
 };
 
 export type BlogPostAction = {
-  type: typeof ADD_POSTS;
-  posts: BlogPosts[];
+  type: typeof ADD_POST;
+  posts: BlogPost[];
 };
 
 export type DeletePostAction = {
-  type: typeof DELETE_POSTS;
+  type: typeof DELETE_POST;
   id: string;
 };
 export type AddNewPostAction = {
   type: typeof ADD_NEW_POST;
-  post: BlogPosts;
+  post: BlogPost;
 };
 export type EditPostAction = {
   type: typeof EDIT_POST;
-  post: BlogPosts;
+  post: BlogPost;
 };
 
 export type CommentAddAction = {
   type: typeof ADD_COMMENT;
-  newComment: Comments;
+  newComment: Comment;
 };
 
 export type CommentDeleteAction = {

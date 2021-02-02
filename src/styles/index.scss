@@ -1,10 +1,5 @@
 @import 'flexboxgrid';
-
-$Manatee: #8e9aaffd; // pelēcīgi zila body background-color
-$LanguidLavender: #CBC0D3; // gaiši violeta
-$PalePink: #EFD3D7; // pelēcīgi rozā
-$PalePurplePantone: #FEEAFA; // gaiši rozā
-$LavenderWeb: #DEE2FF; // gaiši zila
+@import './variables.scss';
 
 * {
   box-sizing: border-box;
@@ -14,18 +9,16 @@ $LavenderWeb: #DEE2FF; // gaiši zila
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $Manatee;
-  margin-top:50px;
+  margin-top: 50px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .flex {
@@ -50,6 +43,10 @@ code {
 
 .margin-bottom--24 {
   margin-bottom: 24px;
+}
+
+.margin-bottom--40 {
+  margin-bottom: 40px;
 }
 
 .margin-bottom--50 {

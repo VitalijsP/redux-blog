@@ -1,16 +1,19 @@
-import React, { useState, FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './comments.module.scss';
-import { Comments } from '../../store/blogPosts/type';
-import { addCommentAction, deleteCommentAction } from '../../store/blogPosts/action';
+
+import { addCommentAction, deleteCommentAction } from '../../store/blogPost/action';
+import { Comment } from '../../store/blogPost/type';
 import { RootState } from '../../store/store';
+import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { Input } from '../atom/input/input';
+import styles from './comments.module.scss';
 
 type Props = {
-  comments: Comments[];
+  comments: Comment[];
   postId: string;
 };
 
-const Comment: FC<Props> = ({ comments, postId }) => {
+export const Comments: FC<Props> = ({ comments, postId }) => {
   const [value, setValue] = useState('');
 
   const loggedUser = useSelector((state: RootState) => state.userInfo);
@@ -19,12 +22,13 @@ const Comment: FC<Props> = ({ comments, postId }) => {
 
   const commentSaveHandler = (commentPostId: string, body: string) => {
     if (value === '') {
-      alert('nav ierakstīts komentārs');
+      // eslint-disable-next-line no-alert
+      alert('Komentāra lauks ir tukšs!');
       return;
     }
     const randomNumber = Math.floor(Math.random() * 100);
     if (loggedUser.email) {
-      const newComment: Comments = {
+      const newComment: Comment = {
         postId: commentPostId,
         commentId: `${randomNumber}`,
         email: loggedUser.email,
@@ -40,73 +44,48 @@ const Comment: FC<Props> = ({ comments, postId }) => {
   };
 
   return (
-    <div className={styles.comments_wrap}>
-      <div className="row">
-        <div className="col-xs-12">
-          <h3 className="margin-bottom--8">Comments</h3>
-          {comments.map(({ commentId, email, body }) => {
-            return (
-              <div key={commentId} className={styles.comments}>
-                <div className="row middle-xs">
-                  <div className="col-xs-11">
-                    <div>
-                      <h5>{email}</h5>
-                      <span>{body}</span>
-                    </div>
-                  </div>
-                  <div className="col-xs-1">
-                    {loggedUser.userType === 'admin' && (
-                      <button
-                        className={styles.button}
-                        type="button"
-                        onClick={() => {
-                          deleteCommentHandler(commentId, postId);
-                        }}
-                      >
-                        Delete
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-          {loggedUser.userType && (
-            <div className={styles.input_wrap}>
-              <div className="row middle-xs margin-bottom--8">
-                <div className="col-xs-12">
-                  <form action="">
-                    <input
-                      type="text"
-                      value={value}
-                      className={styles.input}
-                      placeholder="Write Your comment here..."
-                      onChange={(e) => {
-                        setValue(e.target.value);
-                      }}
-                    />
-                  </form>
-                </div>
-              </div>
-              <div className="row end-xs">
-                <div className="col-xs-12">
-                  <button
-                    className={styles.button}
-                    type="submit"
-                    onClick={() => {
-                      commentSaveHandler(postId, value);
-                    }}
-                  >
-                    Add comment
-                  </button>
-                </div>
-              </div>
+    <div className={styles.commentWrapper}>
+      <h1>Comments</h1>
+      {comments.map(({ commentId, email, body }) => {
+        return (
+          <div key={commentId} className={styles.comments}>
+            <div className="contain">
+              <h5>{email}</h5>
+              <p>{body}</p>
             </div>
-          )}
+            {loggedUser.userType === 'admin' && (
+              <RegularButton
+                type="button"
+                label="Delete"
+                actionHandler={() => {
+                  deleteCommentHandler(commentId, postId);
+                }}
+              />
+            )}
+          </div>
+        );
+      })}
+      {loggedUser.userType && (
+        <div className={styles.inputWrapper}>
+          <form
+            className={styles.form}
+            onSubmit={(e) => {
+              e.preventDefault();
+              commentSaveHandler(postId, value);
+            }}
+          >
+            <Input
+              type="text"
+              value={value}
+              placeholder="Write Your comment here..."
+              inputHandler={(e) => {
+                setValue(e.target.value);
+              }}
+            />
+            <RegularButton type="submit" label="Add comment" />
+          </form>
         </div>
-      </div>
+      )}
     </div>
   );
 };
-
-export default Comment;

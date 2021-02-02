@@ -8,26 +8,28 @@ $ButtonBackground-hover: #dfdbdb;
 $AllmostWhite: #f5f5f5;
 $LavenderWeb-hover: #dee2ff;
 
-.filterButtonWrapper {
+.wrapper {
   margin: 0 0 20px 0;
   padding: 0;
 }
 
 .filerButton {
+  display: flex;
+  width: 100%;
   background-color: transparent;
   border: none;
   padding: 4px 10px;
-  border-radius: 0px 10px 0px 10px;
+  border-radius: 0 10px 0 10px;
   letter-spacing: 1px;
   transition: transform 0.3s ease;
-}
 
-.filerButton:hover {
-  background-color: $ButtonBackground-010;
-  transform: translate(1px, 1px);
-}
+  &:hover {
+    background-color: $ButtonBackground-010;
+    transform: translate(1px, 1px);
+  }
 
-.filerButton:focus {
-  background-color: $BlackShadow-020;
-  outline: none;
+  &:focus {
+    background-color: $BlackShadow-020;
+    outline: none;
+  }
 }

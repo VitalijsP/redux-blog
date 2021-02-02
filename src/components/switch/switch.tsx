@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import styles from './switch.module.scss';
-import admin from '../../images/user-admin.svg';
-import user from '../../images/user-regular.svg';
-import secret from '../../images/user-secret.svg';
+
 import { UserType } from '../../store/user/type';
+import admin from '../assets/images/user-admin.svg';
+import user from '../assets/images/user-regular.svg';
+import secret from '../assets/images/user-secret.svg';
+import styles from './switch.module.scss';
 
 type Props = {
   loggedUser: UserType;
@@ -11,7 +12,7 @@ type Props = {
   registerHandler: () => void
 };
 
-const SwitchAccount: FC<Props> = ({ registerHandler, logoutHandler, loggedUser }) => {
+export const SwitchAccount: FC<Props> = ({ registerHandler, logoutHandler, loggedUser }) => {
 
   return (
     <div className={styles.userWrapper}>
@@ -47,5 +48,3 @@ const SwitchAccount: FC<Props> = ({ registerHandler, logoutHandler, loggedUser }
     </div>
   );
 };
-
-export default SwitchAccount;

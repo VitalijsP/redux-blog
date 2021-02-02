@@ -1,4 +1,4 @@
-export type BlogPosts = {
+export type BlogPost = {
   id: string;
   title: string;
   body: string;
@@ -6,14 +6,23 @@ export type BlogPosts = {
   date: string;
   image: string;
   category: string[];
-  comments: Comments[];
+  comments: Comment[];
 };
 
-type Comments = {
+type Comment = {
   id: string;
   commentId: string;
   email: string;
   body: string;
 };
 
-export const categories = ['Sport', 'Animals', 'Cars', 'Home', 'Media', 'Flowers', 'Wether', 'News'];
+export const categories = [
+  'Sport', 
+  'Animals', 
+  'Cars', 
+  'Home', 
+  'Media', 
+  'Flowers', 
+  'Wether', 
+  'News'
+];

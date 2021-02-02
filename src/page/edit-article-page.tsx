@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { RootState } from '../store/store';
-import { BlogPosts } from '../store/blogPosts/type';
-import { editPostAction } from '../store/blogPosts/action';
-import NewArticleForm from '../components/new-article-form/new-article-form';
 
-const EditArticle: FC = () => {
+import { NewArticleForm } from '../components/new-article-form/new-article-form';
+import { editPostAction } from '../store/blogPost/action';
+import { BlogPost } from '../store/blogPost/type';
+import { RootState } from '../store/store';
+
+export const EditArticle: FC = () => {
   const loggedUser = useSelector((state: RootState) => state.userInfo.userName);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const EditArticle: FC = () => {
   ) => {
     e.preventDefault();
     if (loggedUser && article) {
-      const newPost: BlogPosts = {
+      const newPost: BlogPost = {
         postId: article.postId,
         title,
         body,
@@ -38,16 +39,17 @@ const EditArticle: FC = () => {
       dispatch(editPostAction(newPost));
       history.push('/home');
     } else {
-      alert('you need to log in');
+      // eslint-disable-next-line no-alert
+      alert('You must to log in first!');
     }
   };
 
   return (
     <div>
       <section>
-        <div className="container">
+        <div className="container container-fluid">
           <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+            <div className="col-xs-12">
               <NewArticleForm label="Edit your article" submitHandler={submitHandler} />
             </div>
           </div>
@@ -56,5 +58,3 @@ const EditArticle: FC = () => {
     </div>
   );
 };
-
-export default EditArticle;

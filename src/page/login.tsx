@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import LoginForm from '../components/login-form/login-form';
+
+import { LoginForm } from '../components/login-form/login-form';
 import { UserType } from '../data/users';
 import { loginUserAction } from '../store/user/action';
 
-const Login: FC = () => {
+export const Login: FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordlValue] = useState('');
   
@@ -22,6 +23,7 @@ const Login: FC = () => {
   const userSignInHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!emailValue || !passwordValue) {
+      // eslint-disable-next-line no-alert
       alert('Some fields are empty!');
       return;
     }
@@ -37,6 +39,7 @@ const Login: FC = () => {
       setEmailValue('');
       setPasswordlValue('');
     } else {
+      // eslint-disable-next-line no-alert
       alert('Incoret email or password');
     }
   };
@@ -52,5 +55,3 @@ const Login: FC = () => {
     </div>
   );
 };
-
-export default Login;

@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { RootState } from '../store/store';
-import { BlogPosts } from '../store/blogPosts/type';
-import { addNewPostAction } from '../store/blogPosts/action';
-import NewArticleForm from '../components/new-article-form/new-article-form';
+import { v4 as uuidv4 } from 'uuid';
 
-const NewArticle: FC = () => {
+import { NewArticleForm } from '../components/new-article-form/new-article-form';
+import { addNewPostAction } from '../store/blogPost/action';
+import { BlogPost } from '../store/blogPost/type';
+import { RootState } from '../store/store';
+
+export const NewArticle: FC = () => {
   const loggedUser = useSelector((state: RootState) => state.userInfo.userName);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const NewArticle: FC = () => {
   ) => {
     e.preventDefault();
     if (loggedUser) {
-      const newPost: BlogPosts = {
+      const newPost: BlogPost = {
         postId: uuidv4(),
         title,
         body,
@@ -35,6 +36,7 @@ const NewArticle: FC = () => {
       dispatch(addNewPostAction(newPost));
       history.push('/home');
     } else {
+      // eslint-disable-next-line no-alert
       alert('you need to log in');
     }
   };
@@ -42,9 +44,9 @@ const NewArticle: FC = () => {
   return (
     <div>
       <section>
-        <div className="container">
+        <div className="container container-fluid">
           <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+            <div className="col-xs-12">
               <NewArticleForm label="Create your article" submitHandler={submitHandler} />
             </div>
           </div>
@@ -53,5 +55,3 @@ const NewArticle: FC = () => {
     </div>
   );
 };
-
-export default NewArticle;

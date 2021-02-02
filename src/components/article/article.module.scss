@@ -64,25 +64,3 @@ $LavenderWeb-hover: #dee2ff;
   text-align: justify;
   line-height: 1.5;
 }
-
-.button {
-  height: 30px;
-  width: 100px;
-  background-color: $ButtonBackground-050;
-  border-radius: 6px;
-  border: 1px solid $BrownBorder;
-  color: $BrownBorder;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 8px;
-  margin: 20px 12px;
-}
-
-.button:hover {
-  background-color: rgb(223, 219, 2);
-  color: black;
-}
-
-.flex {
-  display: flex;
-}

@@ -1,47 +1,48 @@
-import { Dispatch } from 'redux';
-import { sampleSize } from 'lodash';
 import axios from 'axios';
-import {
-  BlogPosts,
-  ADD_POSTS,
-  DELETE_POSTS,
-  ADD_COMMENT,
-  ADD_NEW_POST,
-  DELETE_COMMENT,
-  EDIT_POST,
-  Comments,
-} from './type';
+import { sampleSize } from 'lodash';
+import { Dispatch } from 'redux';
+
 import { categories } from '../../data/data';
 import { postBody, randomAuthor } from '../../helper/helper-function';
+import {
+  ADD_COMMENT,
+  ADD_NEW_POST,
+  ADD_POST,
+  BlogPost,
+  Comment,
+  DELETE_COMMENT,
+  DELETE_POST,
+  EDIT_POST,
+} from './type';
 
-export const addPostAction = (posts: BlogPosts[]) => {
+export const addPostAction = (posts: BlogPost[]) => {
   return {
-    type: ADD_POSTS,
+    type: ADD_POST,
     posts,
   };
 };
 
 export const deletePostAction = (id: string) => {
   return {
-    type: DELETE_POSTS,
+    type: DELETE_POST,
     id,
   };
 };
 
-export const addNewPostAction = (post: BlogPosts) => {
+export const addNewPostAction = (post: BlogPost) => {
   return {
     type: ADD_NEW_POST,
     post,
   };
 };
-export const editPostAction = (post: BlogPosts) => {
+export const editPostAction = (post: BlogPost) => {
   return {
     type: EDIT_POST,
     post,
   };
 };
 
-export const addCommentAction = (newComment: Comments) => {
+export const addCommentAction = (newComment: Comment) => {
   return {
     type: ADD_COMMENT,
     newComment,
@@ -59,7 +60,7 @@ export const deleteCommentAction = (commentId: string, id: string) => {
 export const getPostsData = () => {
   return async (dispatch: Dispatch) => {
     axios.get('https://jsonplaceholder.typicode.com/posts').then(({ data }) => {
-      const posts: BlogPosts[] = data.map((post: { id: number; title: string; body: string }) => ({
+      const posts: BlogPost[] = data.map((post: { id: number; title: string; body: string }) => ({
         postId: `${post.id}`,
         title: post.title,
         body: postBody(post.body),
@@ -70,7 +71,7 @@ export const getPostsData = () => {
         comments: [],
       }));
       axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
-        const comments: Comments[] = res.data.map(
+        const comments: Comment[] = res.data.map(
           (comment: { postId: number; id: number; body: string; email: string }) => ({
             postId: `${comment.postId}`,
             commentId: `${comment.id}`,
@@ -78,8 +79,8 @@ export const getPostsData = () => {
             body: comment.body,
           }),
         );
-        posts.forEach((post: BlogPosts) => {
-          comments.forEach((comment: Comments) => {
+        posts.forEach((post: BlogPost) => {
+          comments.forEach((comment: Comment) => {
             if (post.postId === comment.postId) {
               post.comments.push(comment);
             }

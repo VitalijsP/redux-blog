@@ -1,14 +1,15 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { getPostsData } from './store/blogPosts/action';
-import ArticlePage from './page/article-page';
-import Home from './page/home';
-import Login from './page/login';
-import Registration from './page/registration';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import { usersData } from './data/users';
-import NewArticle from './page/create-article-page';
-import EditArticle from './page/edit-article-page';
+import { ArticlePage } from './page/article-page';
+import { NewArticle } from './page/create-article-page';
+import { EditArticle } from './page/edit-article-page';
+import { Home } from './page/home';
+import { Login } from './page/login';
+import { Registration } from './page/registration';
+import { getPostsData } from './store/blogPost/action';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const App: FC = () => {
       localStorage.usersRedux = JSON.stringify(usersData);
     }
     dispatch(getPostsData());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

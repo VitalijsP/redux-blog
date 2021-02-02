@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import styles from './search.module.scss';
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
   handleSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Search: FC<Props> = ({ searchValue, handleSearchValue }) => {
+export const Search: FC<Props> = ({ searchValue, handleSearchValue }) => {
   return (
     <div className={styles.searchWrap}>
       <input
@@ -20,5 +21,3 @@ const Search: FC<Props> = ({ searchValue, handleSearchValue }) => {
     </div>
   );
 };
-
-export default Search;

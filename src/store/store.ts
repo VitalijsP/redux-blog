@@ -1,6 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { blogPostReducer } from './blogPosts/reducer';
+
+import { blogPostReducer } from './blogPost/reducer';
 import { loginUserReducer } from './user/reducer';
 
 const rootReducer = combineReducers({

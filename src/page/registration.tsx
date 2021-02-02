@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import RegistrationForm from '../components/registration-form/registration-form';
+
+import { RegistrationForm } from '../components/registration-form/registration-form';
 import { UserType } from '../data/users';
 
-const Registration: FC = () => {
+export const Registration: FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordlValue] = useState('');
@@ -26,6 +27,7 @@ const Registration: FC = () => {
   const userRegisterHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordValue !== password2Value) {
+      // eslint-disable-next-line no-alert
       alert('Password does not match!');
       return;
     }
@@ -63,5 +65,3 @@ const Registration: FC = () => {
     </div>
   );
 };
-
-export default Registration;

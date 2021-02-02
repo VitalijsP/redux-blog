@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-curly-newline */
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import styles from './new-article-form.module.scss';
+
 import { categories } from '../../data/data';
 import { RootState } from '../../store/store';
+import styles from './new-article-form.module.scss';
 
 type Props = {
   label: string;
@@ -18,7 +19,7 @@ type Props = {
   ) => void;
 };
 
-const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
+export const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [image, setImage] = useState('https://picsum.photos/200/300');
@@ -30,7 +31,7 @@ const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
   const { articleId } = useParams<{ articleId: string }>();
 
   useEffect(() => {
-    const article = posts.find((article) => article.postId === articleId);
+    const article = posts.find((item) => item.postId === articleId);
     if (article) {
       setTitle(article.title);
       setBody(article.body);
@@ -38,6 +39,7 @@ const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
       setSelectedOption1(article.category[0]);
       setSelectedOption2(article.category[1]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const goBackHandler = () => {
@@ -129,4 +131,3 @@ const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
   );
 };
 
-export default NewArticleForm;

@@ -1,6 +1,11 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import logo from '../assets/images/logo.png';
+import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { Image } from '../atom/image/image';
+import { Input } from '../atom/input/input';
 import styles from '../login-form/login-form.module.scss';
-import logo from '../../images/logo.png';
 
 type Props = {
   emailValue: string;
@@ -14,7 +19,7 @@ type Props = {
   userRegisterHandler: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const RegistrationForm: FC<Props> = ({
+export const RegistrationForm: FC<Props> = ({
   emailValue,
   nameValue,
   passwordValue,
@@ -25,67 +30,57 @@ const RegistrationForm: FC<Props> = ({
   handlePassword2Value,
   userRegisterHandler,
 }) => {
+  const history = useHistory();
+
   return (
     <section>
       <div className="container">
-        <div className="row margin-bottom--16">
+        <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <div className={styles.logo_wrapper}>
-              <img src={logo} width="300px" alt="" />
-            </div>
+            <Image link={logo} width={300} height={168} />
           </div>
         </div>
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <form action="" onSubmit={userRegisterHandler}>
-              <label htmlFor="email">Email:</label>
-              <input
-                required
+            <form onSubmit={userRegisterHandler}>
+              <Input
                 type="email"
                 id="email"
-                className={styles.input}
                 value={emailValue}
-                onChange={(e) => handleEmailValue(e)}
+                placeholder="Email"
+                inputHandler={(e) => handleEmailValue(e)}
               />
-              <label htmlFor="username">Username:</label>
-              <input
-                required
+              <Input
                 type="text"
                 id="username"
-                className={styles.input}
+                placeholder="Username"
                 value={nameValue}
-                onChange={(e) => handleNameValue(e)}
+                inputHandler={(e) => handleNameValue(e)}
               />
-              <label htmlFor="password">Password:</label>
-              <input
-                required
+              <Input
                 type="password"
                 id="password"
-                className={styles.input}
                 value={passwordValue}
-                onChange={(e) => handlePasswordValue(e)}
+                placeholder="Password"
+                inputHandler={(e) => handlePasswordValue(e)}
               />
-              <label htmlFor="password2">Repeat password:</label>
-              <input
-                required
+              <Input
                 type="password"
                 id="password2"
-                className={styles.input}
                 value={password2Value}
-                onChange={(e) => handlePassword2Value(e)}
+                placeholder="Repeat password"
+                inputHandler={(e) => handlePassword2Value(e)}
               />
-              <button className={styles.button} type="submit">
-                Sign up
-              </button>
+              <RegularButton label="Register" type="submit" />
             </form>
+            <RegularButton label="Sign in" type="button" actionHandler={() => history.push('/login')} />
           </div>
           <div className="row">
             <div className="col-xs-6 col-xs-offset-3">
               <p className={styles.paragraph}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-                rem nostrum autem dicta quas et suscipit tempora cum dignissimos
-                eum, non aperiam amet hic beatae consequatur veniam quibusdam,
-                maxime necessitatibus?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos rem nostrum autem dicta quas et suscipit
+                tempora cum dignissimos eum, non aperiam amet hic beatae consequatur veniam quibusdam, maxime
+                necessitatibus?
               </p>
             </div>
           </div>
@@ -94,5 +89,3 @@ const RegistrationForm: FC<Props> = ({
     </section>
   );
 };
-
-export default RegistrationForm;

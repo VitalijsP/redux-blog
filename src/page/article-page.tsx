@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Article from '../components/article/article';
+import { useHistory, useParams } from 'react-router-dom';
+
+import { Article } from '../components/article/article';
 import { RootState } from '../store/store';
 
-const ArticlePage: FC = () => {
+export const ArticlePage: FC = () => {
   const history = useHistory();
   const { articleId } = useParams<{ articleId: string }>();
 
@@ -16,9 +17,9 @@ const ArticlePage: FC = () => {
 
   return (
     <section>
-      <div className="container">
+      <div className="container container-fluid">
         <div className="row">
-          <div className="col-xs-8 col-xs-offset-2">
+          <div className="col-xs-12">
             {article && (
               <Article backHandlerButton={() => backHandler()} article={article} />
             )}
@@ -28,5 +29,3 @@ const ArticlePage: FC = () => {
     </section>
   );
 };
-
-export default ArticlePage;

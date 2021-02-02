@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import logo from '../assets/images/logo.png';
+import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { Input } from '../atom/input/input';
 import styles from './login-form.module.scss';
-import logo from '../../images/logo.png';
 
 type Props = {
   emailValue: string;
@@ -11,7 +14,7 @@ type Props = {
   userSignInHandler: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const LoginForm: FC<Props> = ({
+export const LoginForm: FC<Props> = ({
   emailValue,
   passwordValue,
   handleEmailValue,
@@ -19,48 +22,45 @@ const LoginForm: FC<Props> = ({
   userSignInHandler,
 }) => {
   const history = useHistory();
-  const goHomeHandler = () => {
-    history.push('/home');
-  };
 
   return (
     <section>
       <div className="container">
-        <div className="row middle-xs margin-bottom--16">
-          <div className="col-xs-4 col-xs-offset-4">
-            <button type="button" className={styles.logoWrapper} onClick={() => goHomeHandler()}>
+        <div className="row center-xs">
+          <div className="col-xs-4">
+            <button type="button" className={styles.logoWrapper} onClick={() => history.push('/home')}>
               <img src={logo} width="300px" alt="" />
             </button>
           </div>
         </div>
-        <div className="row">
-          <div className="col-xs-4 col-xs-offset-4">
-            <form action="" onSubmit={userSignInHandler}>
-              <input
+        <div className="row center-xs">
+          <div className="col-xs-4">
+            <form onSubmit={userSignInHandler}>
+              <Input
                 type="email"
                 id="email"
                 value={emailValue}
-                className={styles.input}
-                placeholder="Email"
-                onChange={(e) => handleEmailValue(e)}
+                placeholder="E-mail"
+                inputHandler={(e) => handleEmailValue(e)}
               />
-              <input
+              <Input
                 type="password"
                 id="password"
                 value={passwordValue}
-                className={styles.input}
                 placeholder="Password"
-                onChange={(e) => handlePasswordValue(e)}
+                inputHandler={(e) => handlePasswordValue(e)}
               />
-              <button type="submit" className={styles.button}>
-                Sign in
-              </button>
+              <RegularButton label="Sign in" type="submit" classProps="w100" />
             </form>
+            <RegularButton
+              label="Registration"
+              type="button"
+              classProps="w100"
+              actionHandler={() => history.push('/registration')}
+            />
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-export default LoginForm;
