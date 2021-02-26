@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { RegularButton } from '../../atom/button/regularButton/regularButton';
+import { RegularButton } from '../../atom/button/regular-button/regular-button';
 import { Image } from '../../atom/image/image';
 import styles from './small-card.module.scss';
 
@@ -23,7 +23,7 @@ export const SmallCard: FC<Props> = ({ title, body, image, category, articleHand
           {category[0]}, {category[1]}
         </p>
       </div>
-      <RegularButton label="Read more" type="button" actionHandler={articleHandler} />
+      <RegularButton type="button" actionHandler={articleHandler}>Read more</RegularButton>
     </div>
   );
 };

@@ -9,18 +9,21 @@ $AllmostWhite: #f5f5f5;
 $LavenderWeb-hover: #dee2ff;
 
 .wrapper {
-  margin: 0 0 20px 0;
-  padding: 0;
+  display:flex;
+  flex-flow: wrap ;
+  align-items: center;
+  justify-content: center;
 }
 
-.filerButton {
-  display: flex;
+.linkButton {
+  flex-wrap: wrap;
   width: 100%;
   background-color: transparent;
   border: none;
-  padding: 4px 10px;
+  font-size: 14px;
+  padding: 6px;
   border-radius: 0 10px 0 10px;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   transition: transform 0.3s ease;
 
   &:hover {

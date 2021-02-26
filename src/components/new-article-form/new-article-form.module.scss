@@ -3,7 +3,7 @@ $BrownBorder: #535353;
 $AllmostWhite: #f5f5f5;
 $BackGround-050: rgba(245, 245, 245, 0.5);
 
-.articleWrapper {
+.wrapper {
   display: block;
   background-color: $AllmostWhite;
   padding: 20px 6px 10px 6px;
@@ -65,9 +65,9 @@ $BackGround-050: rgba(245, 245, 245, 0.5);
   justify-content: center;
   padding: 8px;
   margin-top: 20px;
-}
 
-.button:hover {
-  background-color: rgb(223, 219, 219);
-  color: black;
+  &:hover {
+    background-color: rgb(223, 219, 219);
+    color: black;
+  }
 }

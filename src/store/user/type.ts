@@ -8,6 +8,21 @@ export type UserType = {
   userType?: string;
 };
 
+export const usersData: UserType[] = [
+  {
+    email: 'vitalijs@gmail.com',
+    userName: 'vitalijs',
+    pasword: '12345',
+    userType: 'user',
+  },
+  {
+    email: 'mikus@gmail.com',
+    userName: 'mikus',
+    pasword: 'qwerty',
+    userType: 'admin',
+  },
+];
+
 export type UserLoginAction = {
   type: string;
   user: UserType;
@@ -18,3 +33,5 @@ export type LogoutUserAction = {
 };
 
 export type AllActions = UserLoginAction;
+
+

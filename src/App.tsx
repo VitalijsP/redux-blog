@@ -2,14 +2,15 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { usersData } from './data/users';
-import { ArticlePage } from './page/article-page';
-import { NewArticle } from './page/create-article-page';
-import { EditArticle } from './page/edit-article-page';
-import { Home } from './page/home';
-import { Login } from './page/login';
-import { Registration } from './page/registration';
+import { Header } from './components/organisms/header/header';
+import { CreatePostPage } from './page/create';
+import { EditPostPage } from './page/edit';
+import { HomePage } from './page/home';
+import { LoginPage } from './page/login';
+import { PostPage } from './page/post';
+import { RegistrationPage } from './page/registration';
 import { getPostsData } from './store/blogPost/action';
+import { usersData } from './store/user/type';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -20,32 +21,33 @@ const App: FC = () => {
       localStorage.usersRedux = JSON.stringify(usersData);
     }
     dispatch(getPostsData());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Router>
+      <Header />
       <Switch>
         <Route exact path="/login">
-          <Login />
+          <LoginPage />
         </Route>
         <Route exact path="/registration">
-          <Registration />
+          <RegistrationPage />
         </Route>
-        <Route exact path="/article/:articleId">
-          <ArticlePage />
+        <Route exact path="/article/:slug">
+          <PostPage />
         </Route>
-        <Route exact path="/new-article">
-          <NewArticle />
+        <Route exact path="/create">
+          <CreatePostPage />
         </Route>
-        <Route exact path="/edit-article/:articleId">
-          <EditArticle />
+        <Route exact path="/edit/:slug">
+          <EditPostPage />
         </Route>
         <Route exact path="/home">
-          <Home />
+          <HomePage />
         </Route>
         <Route exact path="/">
-          <Home />
+          <HomePage />
         </Route>
       </Switch>
     </Router>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCommentAction, deleteCommentAction } from '../../store/blogPost/action';
 import { Comment } from '../../store/blogPost/type';
 import { RootState } from '../../store/store';
-import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { RegularButton } from '../atom/button/regular-button/regular-button';
 import { Input } from '../atom/input/input';
 import styles from './comments.module.scss';
 
@@ -56,11 +56,12 @@ export const Comments: FC<Props> = ({ comments, postId }) => {
             {loggedUser.userType === 'admin' && (
               <RegularButton
                 type="button"
-                label="Delete"
                 actionHandler={() => {
                   deleteCommentHandler(commentId, postId);
                 }}
-              />
+              >
+                Delete
+              </RegularButton>
             )}
           </div>
         );
@@ -82,7 +83,9 @@ export const Comments: FC<Props> = ({ comments, postId }) => {
                 setValue(e.target.value);
               }}
             />
-            <RegularButton type="submit" label="Add comment" />
+            <RegularButton type="submit">
+              Add comment
+            </RegularButton>
           </form>
         </div>
       )}

@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { LoginForm } from '../components/login-form/login-form';
-import { UserType } from '../data/users';
 import { loginUserAction } from '../store/user/action';
+import { UserType } from '../store/user/type';
 
-export const Login: FC = () => {
+export const LoginPage: FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordlValue] = useState('');
   

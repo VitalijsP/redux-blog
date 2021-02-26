@@ -2,17 +2,15 @@ import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { FilterButton } from '../components/atom/button/filter-button/filter-button';
-import { RegularButton } from '../components/atom/button/regularButton/regularButton';
+import { LinkButton } from '../components/atom/button/link-button/link-button';
+import { RegularButton } from '../components/atom/button/regular-button/regular-button';
+import { Input } from '../components/atom/input/input';
 import { LargeCard } from '../components/card/large-card/large-card';
-import { Search } from '../components/search/search';
-import { SwitchAccount } from '../components/switch/switch';
 import { categories } from '../data/data';
 import { deletePostAction } from '../store/blogPost/action';
 import { RootState } from '../store/store';
-import { logoutUserAction } from '../store/user/action';
 
-export const Home: FC = () => {
+export const HomePage: FC = () => {
   const [chosenCategory, setChosenCategory] = useState('All');
   const [searchValue, setSearchValue] = useState('');
 
@@ -23,17 +21,8 @@ export const Home: FC = () => {
 
   const posts = useSelector((store: RootState) => store.blogPosts);
 
-  const logoutHandler = () => {
-    dispatch(logoutUserAction());
-    history.push('/login');
-  };
-
   const newArticleHandler = () => {
-    history.push('/new-article');
-  };
-
-  const registerHandler = () => {
-    history.push('/registration');
+    history.push('/create');
   };
 
   const deleteHandler = (id: string) => {
@@ -63,33 +52,31 @@ export const Home: FC = () => {
   return (
     <div className="container container-fluid">
       <div className="row">
-        <div className="col-xs-12">
-          <SwitchAccount registerHandler={registerHandler} logoutHandler={logoutHandler} loggedUser={loggedUser} />
+        <div className="col-sm-3 col-xs-12">
+          <Input
+            type="text"
+            id="search"
+            value={searchValue}
+            placeholder="search"
+            inputHandler={(e) => handleSearchValue(e)}
+          />
         </div>
-      </div>
-      <div className="row">
-        <div className="col-sm-4 col-xs-12">
-          <Search searchValue={searchValue} handleSearchValue={handleSearchValue} />
-        </div>
-        <div className="col-sm-8 col-xs-12 flex between-sm">
-          <FilterButton label="All" chosenCategoryHandler={() => chosenCategoryHandler('All')} />
+        <div className="col-sm-9 col-xs-12 flex between-sm">
+          <LinkButton label="filter" clickHandler={() => chosenCategoryHandler('All')}>
+            All
+          </LinkButton>
           {categories.map((category) => (
-            <FilterButton
-              key={category}
-              label={category}
-              chosenCategoryHandler={() => chosenCategoryHandler(category)}
-            />
+            <LinkButton label="filter" key={category} clickHandler={() => chosenCategoryHandler(category)}>
+              {category}
+            </LinkButton>
           ))}
         </div>
         <div className="row w100">
           {loggedUser.userType && (
             <div className="col-xs-12 margin-bottom--8">
-              <RegularButton
-                actionHandler={() => newArticleHandler()}
-                label="Create article"
-                type="button"
-                classProps="w100"
-              />
+              <RegularButton actionHandler={() => newArticleHandler()} type="button" classProps="w100">
+                Create article
+              </RegularButton>
             </div>
           )}
         </div>

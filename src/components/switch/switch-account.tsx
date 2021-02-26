@@ -4,21 +4,21 @@ import { UserType } from '../../store/user/type';
 import admin from '../assets/images/user-admin.svg';
 import user from '../assets/images/user-regular.svg';
 import secret from '../assets/images/user-secret.svg';
-import styles from './switch.module.scss';
+import { LinkButton } from '../atom/button/link-button/link-button';
+import styles from './switch-account.module.scss';
 
 type Props = {
   loggedUser: UserType;
   logoutHandler: () => void;
-  registerHandler: () => void
+  registerHandler: () => void;
 };
 
 export const SwitchAccount: FC<Props> = ({ registerHandler, logoutHandler, loggedUser }) => {
-
   return (
-    <div className={styles.userWrapper}>
+    <div className={styles.wrapper}>
       {loggedUser.userType ? (
-        <div>
-          <span>
+        <div className={styles.user}>
+          <span className={styles.welcomeText}>
             {loggedUser.userName} logged as {loggedUser.userType}!
           </span>
           {loggedUser.userType === 'admin' ? (
@@ -28,22 +28,14 @@ export const SwitchAccount: FC<Props> = ({ registerHandler, logoutHandler, logge
           )}
         </div>
       ) : (
-        <div>
-          <span className={styles.welcomeText}>Hello, stranger!</span>
+        <div className={styles.user}>
+          <span className={styles.welcomeText}>Hello, Stranger!</span>
           <img src={secret} width="30px" alt="" className={styles.avatar} />
         </div>
       )}
-      <div>
-        <button type="button" className={styles.button} onClick={logoutHandler}>
-          {loggedUser.userType ? 'Logout' : 'Login'}
-        </button>
-      </div>
+      <LinkButton clickHandler={logoutHandler}>{loggedUser.userType ? 'Logout' : 'Login'}</LinkButton>
       {!loggedUser.userType && (
-        <div>
-          <button type="button" className={styles.button} onClick={registerHandler}>
-            Register
-          </button>
-        </div>
+        <LinkButton clickHandler={registerHandler}>Register</LinkButton>
       )}
     </div>
   );

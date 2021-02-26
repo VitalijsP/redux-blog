@@ -5,11 +5,11 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Article } from '../components/article/article';
 import { RootState } from '../store/store';
 
-export const ArticlePage: FC = () => {
+export const PostPage: FC = () => {
   const history = useHistory();
-  const { articleId } = useParams<{ articleId: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
-  const article = useSelector((state: RootState) => state.blogPosts.find((item) => item.postId === articleId));
+  const article = useSelector((state: RootState) => state.blogPosts.find((item) => item.postId === slug));
 
   const backHandler = () => {
     history.push('/home');

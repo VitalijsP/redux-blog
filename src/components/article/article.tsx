@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { BlogPost } from '../../store/blogPost/type';
 import { RootState } from '../../store/store';
 import { UserType } from '../../store/user/type';
-import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { RegularButton } from '../atom/button/regular-button/regular-button';
 import { SmallCard } from '../card/small-card/small-card';
 import { Comments } from '../comments/comments';
 import styles from './article.module.scss';
@@ -43,16 +43,20 @@ export const Article: FC<Props> = ({ article, backHandlerButton }) => {
   };
 
   const editHandler = () => {
-    history.push(`/edit-article/${postId}`);
+    history.push(`/edit/${postId}`);
   };
 
   return (
     <div className={styles.articleWrapper}>
       <div className="row">
         <div className="col-xs-12 flex between-xs">
-          <RegularButton type="button" label="Go back" actionHandler={backHandlerButton} />
+          <RegularButton type="button" actionHandler={backHandlerButton}>
+            Go back
+          </RegularButton>
           {user.userName?.toLowerCase() === article.author.toLowerCase() && (
-            <RegularButton type="button" label="Edit" actionHandler={editHandler} />
+            <RegularButton type="button" actionHandler={editHandler}>
+              Edit
+            </RegularButton>
           )}
         </div>
       </div>

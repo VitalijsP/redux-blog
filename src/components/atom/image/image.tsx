@@ -11,14 +11,11 @@ type Props = {
 };
 
 export const Image: FC<Props> = ({ alt, loading, width = 100, height = 100, link }) => {
-  const paddingTop = {
-    paddingTop: `${(height / width) * 100}%`,
-  };
-
+ 
   return (
-    <div style={paddingTop} className={styles.imageWrapper}>
-      {/* {loading && <h1 className={styles.loading}>Loading...</h1>} */}
-      <img src={link} width={width} height={height} className={styles.image} alt={alt} />
-    </div>
+    <figure className={styles.figure} style={{ paddingTop: `${(height / width) * 100}%` }}>
+      {loading && <h1 className={styles.loading}>Loading...</h1>}
+      <img src={link} className={styles.image} alt={alt} />
+    </figure>
   );
 };

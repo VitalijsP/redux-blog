@@ -7,13 +7,13 @@ import { editPostAction } from '../store/blogPost/action';
 import { BlogPost } from '../store/blogPost/type';
 import { RootState } from '../store/store';
 
-export const EditArticle: FC = () => {
+export const EditPostPage: FC = () => {
   const loggedUser = useSelector((state: RootState) => state.userInfo.userName);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { articleId } = useParams<{ articleId: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
-  const article = useSelector((state: RootState) => state.blogPosts.find((post) => post.postId === articleId));
+  const article = useSelector((state: RootState) => state.blogPosts.find((post) => post.postId === slug));
 
   const submitHandler = (
     e: React.FormEvent<HTMLFormElement>,

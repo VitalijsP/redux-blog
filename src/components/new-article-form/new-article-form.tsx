@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { categories } from '../../data/data';
 import { RootState } from '../../store/store';
+import { Input } from '../atom/input/input';
 import styles from './new-article-form.module.scss';
 
 type Props = {
@@ -28,10 +29,10 @@ export const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
 
   const posts = useSelector((state: RootState) => state.blogPosts);
   const history = useHistory();
-  const { articleId } = useParams<{ articleId: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
   useEffect(() => {
-    const article = posts.find((item) => item.postId === articleId);
+    const article = posts.find((item) => item.postId === slug);
     if (article) {
       setTitle(article.title);
       setBody(article.body);
@@ -39,7 +40,7 @@ export const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
       setSelectedOption1(article.category[0]);
       setSelectedOption2(article.category[1]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const goBackHandler = () => {
@@ -47,7 +48,7 @@ export const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
   };
 
   return (
-    <div className={styles.articleWrapper}>
+    <div className={styles.wrapper}>
       <div className="row">
         <div className="col-xs-12">
           <h1 className={styles.title}>{label}</h1>
@@ -60,14 +61,13 @@ export const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
       >
         <div className="row">
           <div className="col-xs-4">
-            <input
+            <Input
               type="text"
               id="title"
               placeholder="Title"
-              className={styles.inputField}
+              //  classProps={styles.classProps}
               value={title}
-              required
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+              inputHandler={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
             />
             <input
               type="text"
@@ -130,4 +130,3 @@ export const NewArticleForm: FC<Props> = ({ label, submitHandler }) => {
     </div>
   );
 };
-

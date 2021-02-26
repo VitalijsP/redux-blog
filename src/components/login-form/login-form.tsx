@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import logo from '../assets/images/logo.png';
-import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { RegularButton } from '../atom/button/regular-button/regular-button';
 import { Input } from '../atom/input/input';
 import styles from './login-form.module.scss';
 
@@ -24,43 +24,41 @@ export const LoginForm: FC<Props> = ({
   const history = useHistory();
 
   return (
-    <section>
-      <div className="container">
-        <div className="row center-xs">
-          <div className="col-xs-4">
-            <button type="button" className={styles.logoWrapper} onClick={() => history.push('/home')}>
-              <img src={logo} width="300px" alt="" />
-            </button>
-          </div>
-        </div>
-        <div className="row center-xs">
-          <div className="col-xs-4">
-            <form onSubmit={userSignInHandler}>
-              <Input
-                type="email"
-                id="email"
-                value={emailValue}
-                placeholder="E-mail"
-                inputHandler={(e) => handleEmailValue(e)}
-              />
-              <Input
-                type="password"
-                id="password"
-                value={passwordValue}
-                placeholder="Password"
-                inputHandler={(e) => handlePasswordValue(e)}
-              />
-              <RegularButton label="Sign in" type="submit" classProps="w100" />
-            </form>
-            <RegularButton
-              label="Registration"
-              type="button"
-              classProps="w100"
-              actionHandler={() => history.push('/registration')}
+    <div className="container container-fluid">
+      <div className="row center-xs">
+        <div className="col-xs-4">
+          <button type="button" className={styles.logoWrapper} onClick={() => history.push('/home')}>
+            <img src={logo} width="300px" alt="" />
+          </button>
+          <form id="login" onSubmit={userSignInHandler}>
+            <Input
+              type="email"
+              id="email"
+              value={emailValue}
+              placeholder="E-mail"
+              inputHandler={(e) => handleEmailValue(e)}
+              classProps="loginRegister"
             />
-          </div>
+            <Input
+              type="password"
+              id="password"
+              value={passwordValue}
+              placeholder="Password"
+              inputHandler={(e) => handlePasswordValue(e)}
+              classProps="loginRegister"
+            />
+            <RegularButton type="submit" classProps="w100">
+              Sign in
+            </RegularButton>
+          </form>
+          <RegularButton type="button" classProps="w100" actionHandler={() => history.push('/registration')}>
+            Registration
+          </RegularButton>
+          <p>TEST "To login as user" email: vitalijs@gmail.com, pasword: 12345.</p>
+          <p>TEST "To login as admin" email: mikus@gmail.com, pasword: qwerty</p>
+          <p>*Or create new user, click "Registration"</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

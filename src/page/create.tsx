@@ -8,7 +8,7 @@ import { addNewPostAction } from '../store/blogPost/action';
 import { BlogPost } from '../store/blogPost/type';
 import { RootState } from '../store/store';
 
-export const NewArticle: FC = () => {
+export const CreatePostPage: FC = () => {
   const loggedUser = useSelector((state: RootState) => state.userInfo.userName);
   const history = useHistory();
   const dispatch = useDispatch();

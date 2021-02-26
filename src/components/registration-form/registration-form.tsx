@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import logo from '../assets/images/logo.png';
-import { RegularButton } from '../atom/button/regularButton/regularButton';
+import { RegularButton } from '../atom/button/regular-button/regular-button';
 import { Image } from '../atom/image/image';
 import { Input } from '../atom/input/input';
 import styles from '../login-form/login-form.module.scss';
@@ -42,7 +42,7 @@ export const RegistrationForm: FC<Props> = ({
         </div>
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <form onSubmit={userRegisterHandler}>
+            <form id="registration" onSubmit={userRegisterHandler}>
               <Input
                 type="email"
                 id="email"
@@ -71,9 +71,13 @@ export const RegistrationForm: FC<Props> = ({
                 placeholder="Repeat password"
                 inputHandler={(e) => handlePassword2Value(e)}
               />
-              <RegularButton label="Register" type="submit" />
+              <RegularButton type="submit" classProps="w100">
+                Register
+              </RegularButton>
             </form>
-            <RegularButton label="Sign in" type="button" actionHandler={() => history.push('/login')} />
+            <RegularButton type="button" classProps="w100" actionHandler={() => history.push('/login')}>
+              Sign in
+            </RegularButton>
           </div>
           <div className="row">
             <div className="col-xs-6 col-xs-offset-3">

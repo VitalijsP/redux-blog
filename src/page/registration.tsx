@@ -2,9 +2,9 @@ import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { RegistrationForm } from '../components/registration-form/registration-form';
-import { UserType } from '../data/users';
+import { UserType } from '../store/user/type';
 
-export const Registration: FC = () => {
+export const RegistrationPage: FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordlValue] = useState('');
