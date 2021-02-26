@@ -1,0 +1,41 @@
+$BlackShadow-020: #00000033;
+$BrownBorder: #535353;
+$ButtonBackground-050: #f5f5f580;
+$ButtonBackground-010: #0000001a;
+$ButtonText-070: #000000b3;
+$ButtonBackground-hover: #dfdbdb;
+$AllmostWhite: #f5f5f5;
+$LavenderWeb-hover: #dee2ff;
+
+.card {
+  display: flex;
+  background-color: $AllmostWhite;
+  border: 1px solid $BrownBorder;
+  border-radius: 4px;
+  box-shadow: 0 10px 10px 0 $BlackShadow-020;
+  padding: 10px;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: $LavenderWeb-hover;
+    box-shadow: 0px 8px 10px 0px $BlackShadow-020;
+    opacity: 1;
+    transform: translate(1px, 1px);
+  }
+}
+
+.content {
+  padding: 8px 16px;
+}
+
+@media only screen and (max-width: 800px) {
+  // .imageWrapper {
+  //   min-height: 200px;
+  // }
+
+  .card {
+    display: block;
+  }
+}

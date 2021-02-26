@@ -1,0 +1,27 @@
+$BlackShadow-020: #00000033;
+$BrownBorder: #535353;
+$ButtonBackground-050: #f5f5f580;
+$ButtonBackground-010: #0000001a;
+$ButtonText-070: #000000b3;
+$ButtonBackground-hover: #dfdbdb;
+$AllmostWhite: #f5f5f5;
+$LavenderWeb-hover: #dee2ff;
+$YellowBacground-hover: #dfdb02;
+
+.button {
+  height: 30px;
+  background-color: $ButtonBackground-050;
+  border-radius: 6px;
+  border: 1px solid $BrownBorder;
+  color: $BrownBorder;
+  cursor: pointer;
+  font-size: 14px;
+  justify-content: center;
+  padding: 4px 14px;
+  margin: 0 4px;
+
+  &:hover {
+    background-color: #e4e2a6;
+    color: black;
+  }
+}
